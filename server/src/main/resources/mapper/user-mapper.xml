@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.UserDao">
+
+    <resultMap id="user" type="cn.omsfuk.discount.dto.User">
+        <id column="id" property="id"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <association property="role" column="roleId" select="cn.omsfuk.discount.dao.Role.getRoleById"/>
+    </resultMap>
+
+    <select id="getUserById" resultMap="user">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getUserByEmail" resultMap="user">
+        SELECT *
+        FROM user
+        WHERE email = #{email}
+    </select>
+
+    <select id="getUserByPhone" resultMap="user">
+        SELECT *
+        FROM user
+        WHERE phone = #{phone}
+    </select>
+</mapper>

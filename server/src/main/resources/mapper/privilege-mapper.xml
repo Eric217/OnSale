@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.PrivilegeDao">
+
+    <select id="getPrivilegeByRoleId" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT name
+        FROM privilege
+        WHERE id in (SELECT privilege_id FROM role_privilege WHERE role_id = 1)
+    </select>
+</mapper>

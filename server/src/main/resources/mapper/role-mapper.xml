@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.Role">
+
+    <resultMap id="role" type="cn.omsfuk.discount.model.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="privileges" column="id" select="cn.omsfuk.discount.dao.PrivilegeDao.getPrivilegeByRoleId"/>
+    </resultMap>
+
+    <select id="getRoleById" parameterType="int" resultMap="role">
+      SELECT *
+      FROM role
+      WHERE id = #{id}
+    </select>
+</mapper>

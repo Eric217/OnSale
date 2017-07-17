@@ -19,6 +19,7 @@
 
 
     <typeAliases>
+        <typeAlias type="cn.omsfuk.discount.dto.User" alias="user"/>
     </typeAliases>
 
 </configuration>
