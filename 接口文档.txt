@@ -144,6 +144,7 @@ request:
 	
 	userID:"abc"  // 昵称 String 
 	password:"abc"  // 密码 String
+	gender:"abc" // 性别
 }
 response:
 {
