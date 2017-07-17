@@ -31,9 +31,7 @@ method:POST（multipartFormData）
     location:"location" // 地点 String
     longitude:double  //经度
     latitude:double   //纬度
-    time:"2016-01-02 12:40:00", //上传时间 String
-    deadline:"2018-08-09 09:09:09",// 最后有效期 String
-    isValid:int //发布时是1，商品过期后后台改为0，清除过期商品的问题再讨论
+    deadline:"2018-08-09 09:09:09",// 最后有效期 String
     nickname:"String" // 上传者昵称
     pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
 
@@ -132,7 +130,9 @@ response:
 		]
 	}
 }
+
 ************************
+
 注册用户：
 URL:/api/user/signUp
 method:POST
@@ -151,6 +151,7 @@ response:
 	"message":"OK"
 }
 ************************
+
 验证账号或手机号或邮箱是否已经注册过用户，目的是：用户刚输完昵称(我发给后台检查)，正在输密码时就提示错误（此项功能可省略）
 URL:/api/user/validateSignUp
 method:POST
@@ -161,7 +162,8 @@ request:
 	//手机或邮箱在post的时候只有一个会有值
 	
 	nickname:"abc"  // 昵称 String 
-	//加上 昵称，一共传2个参数，每个参数要求数据库中唯一
+	
+	//加上 昵称，一共传2个参数。任意一个传入参数都要求在数据库中唯一，否则 状态码  fail。
 	
 }
 response:
@@ -169,6 +171,7 @@ response:
 	"status":200
 	"message":"OK"
 }
+
 ************************
 
 附 用户的全部属性：
@@ -179,8 +182,8 @@ password:String
 phone:String
 email:String
 realname:String //真名
-realID:String   //身份证
-
+realID:String   //身份证
+pic:image
 type:int 
 1 : normal(default)
 2 : seller //卖东西的
@@ -194,6 +197,7 @@ other:unknown 想起来再加
 
 
 ************************
+
 登陆：
 URL:/api/user/signIn
 method:POST
@@ -201,19 +205,83 @@ request:
 {
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
-	//手机或邮箱在post的时候只有一个会赋值
+	nickname:"abc"  // 昵称 String
+	//这三个只有一个会有值
 	
 	password:"abc"  // 密码  	String	
+}
+登陆后直接给我这个人的个人信息：
+response:
+{
+	status:200
+	message:"OK"
+	data:{
+		id:int
+		type:int 
+		gender:String //性别
+		nickname:String
+		password:String
+		phone:String
+		email:String
+		realname:String //真名
+		realID:String   //身份证
+		pic:String //头像图片的 url
+	}
+}
+************************
+
+获取用户信息
+URL:/api/user/getUserInfo
+method:get
+request:
+{
+	id:int
+	nickname:"abc"  // 昵称 String
+	email:"123@123" // 邮箱 String
+	phone:"1234567" // 手机 String
+	//这4值个只有一个会赋值
+}
+response:
+{
+	status:200
+	message:"OK"
+	data:{
+		id:int
+		type:int 
+		gender:String //性别
+		nickname:String
+		phone:String
+		email:String
+		realname:String //真名
+		realID:String   //身份证
+		pic:String //头像图片的 url，
+	}
+}
+
+
+***********************
+
+这个负责 修改密码，修改信息
+URL:/api/user/changeInfo
+method:POST
+request:
+{
+	id:123 //
+	
+	type:int 
+	gender:String
+	nickname:String
+	oldPassword:String
+	password:String
+	phone:String
+	email:String
+	
 }
 response:
 {
 	"status":200
 	"message":"OK"
 }
-
-***********************
-感觉修改信息需要新建一个URL，这个负责 修改密码，修改信息
-
 
 
 
