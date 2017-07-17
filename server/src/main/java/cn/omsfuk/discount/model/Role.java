@@ -12,6 +12,10 @@ import java.util.List;
 @Data
 public class Role {
 
+    public static final Integer ANONYMOUS = 1;
+
+    public static final Integer NORMAL = 2;
+
     private Integer id;
 
     private String name;

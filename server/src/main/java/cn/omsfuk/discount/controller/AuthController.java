@@ -6,6 +6,7 @@ import cn.omsfuk.discount.service.AuthService;
 import cn.omsfuk.discount.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,20 +26,25 @@ public class AuthController {
         if (ObjectUtil.notNull(email, password)) {
             return authService.loginWithEmail(email, password);
         } else if (ObjectUtil.notNull(phone, password)) {
-            return authService.loginWithEmail(phone, password);
+            return authService.loginWithPhone(phone, password);
         } else {
-            return ResultCache.FAILURE;
+            return ResultCache.getFailure("wrong parameter format");
         }
     }
 
     @RequestMapping(value = "user/signUp")
-    public Result signUp(String email, String phone, String password) {
-        if (ObjectUtil.notNull(email, password)) {
-            return authService.loginWithEmail(email, password);
-        } else if (ObjectUtil.notNull(phone, password)) {
-            return authService.loginWithEmail(phone, password);
+    public Result signUp(String email, String phone, String nickname, String password) {
+        if (ObjectUtil.notNull(email, password, nickname)) {
+            return authService.registerWithEmail(email, nickname, password);
+        } else if (ObjectUtil.notNull(phone, password, nickname)) {
+            return authService.registerWithPhone(phone, nickname, password);
         } else {
-            return ResultCache.FAILURE;
+            return ResultCache.getFailure("wrong parameter format");
         }
+    }
+
+    @RequestMapping(value = "user/validateSignUp", method = RequestMethod.POST)
+    public Result validate(String email, String phone, String nickname) {
+        return authService.validate(email, phone, nickname);
     }
 }

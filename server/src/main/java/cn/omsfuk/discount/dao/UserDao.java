@@ -1,6 +1,7 @@
 package cn.omsfuk.discount.dao;
 
-import cn.omsfuk.discount.dto.User;
+import cn.omsfuk.discount.dto.UserDto;
+import cn.omsfuk.discount.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,10 +12,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
 
-    User getUserById(@Param("id") int id);
+    int insertUser(UserDto user);
 
-    User getUserByEmail(@Param("id") String email);
+    UserVo getUserById(@Param("id") int id);
 
-    User getUserByPhone(@Param("phone") String phone);
+    UserVo getUserByEmail(@Param("email") String email);
+
+    UserVo getUserByPhone(@Param("phone") String phone);
+
+    UserVo getUserByNickName(@Param("nickName") String nickName);
 
 }

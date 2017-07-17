@@ -2,13 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.omsfuk.discount.dao.UserDao">
 
-    <resultMap id="user" type="cn.omsfuk.discount.dto.User">
+    <resultMap id="user" type="cn.omsfuk.discount.vo.UserVo">
         <id column="id" property="id"/>
         <result column="email" property="email"/>
         <result column="password" property="password"/>
         <result column="phone" property="phone"/>
-        <association property="role" column="roleId" select="cn.omsfuk.discount.dao.Role.getRoleById"/>
+        <association property="role" column="role_id" select="cn.omsfuk.discount.dao.Role.getRoleById"/>
     </resultMap>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT USER(email, phone, nickname, password, role_id)
+        VALUES(#{email}, #{phone}, #{nickname}, #{password}, #{roleId})
+    </insert>
 
     <select id="getUserById" resultMap="user">
         SELECT *
@@ -26,5 +30,10 @@
         SELECT *
         FROM user
         WHERE phone = #{phone}
+    </select>
+    <select id="getUserByNickName" resultType="cn.omsfuk.discount.vo.UserVo">
+        SELECT *
+        FROM user
+        WHERE nickName = #{nickName}
     </select>
 </mapper>

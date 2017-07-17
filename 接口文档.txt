@@ -90,8 +90,6 @@ request:
 {
 	goodID:int     //商品id
 	content:"abc"  //评论内容（现在是String，等以后可以做成像发布商品那样，multipartFormData，有图有字）
-	userID:"abc" //评论者昵称 String 
-	time:"String"  //评论时间
 }
 response:
 {
