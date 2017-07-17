@@ -32,7 +32,6 @@ method:POST（multipartFormData）
     longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
-    userID:"String" // 上传者昵称
     pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
 
 }
