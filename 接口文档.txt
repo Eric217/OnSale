@@ -144,7 +144,7 @@ request:
 	phone:"1234567" // 手机 String
 	//手机或邮箱在post的时候只有一个会赋值
 	
-	userID:"abc"  // 昵称 String 
+	nickname:"abc"  // 昵称 String 
 	password:"abc"  // 密码 String
 	gender:"abc" // 性别
 }
