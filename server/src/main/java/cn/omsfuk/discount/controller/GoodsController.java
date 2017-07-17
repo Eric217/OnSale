@@ -46,7 +46,7 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public Result comment(Integer ) {
+    public Result comment(Integer goodsID, ) {
 
     }
 }
