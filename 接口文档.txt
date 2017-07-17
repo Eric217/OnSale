@@ -33,7 +33,7 @@ method:POST（multipartFormData）
     latitude:double   //纬度
     time:"2016-01-02 12:40:00", //上传时间 String
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
-    isValid:Bool //发布时是true，商品过期后后台改为false，清除过期商品的问题再讨论
+    isValid:int //发布时是1，商品过期后后台改为0，清除过期商品的问题再讨论
     nickname:"String" // 上传者昵称
     pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
 
