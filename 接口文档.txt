@@ -32,7 +32,7 @@ method:POST（multipartFormData）
     longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
-    nickname:"String" // 上传者昵称
+    userID:"String" // 上传者昵称
     pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
 
 }
@@ -51,7 +51,7 @@ request:{
      	type ：2  // 如果没写 就是任意type数据
 	page ：2  // 请求第几页，没写就是第一页
       	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
-	nickname ：“String” // 上传者昵称，如果没写就是任意
+	userID ：“String” // 上传者昵称，如果没写就是任意
 	isValid:Bool //没写就是任意
 }
 response:
@@ -73,7 +73,7 @@ response:
     			    time:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
 			    isValid:Bool
-			    nickname:"String" // 上传者昵称
+			    userID:"String" // 上传者昵称
 			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
 		    }
 		    ...
@@ -90,7 +90,7 @@ request:
 {
 	goodID:int     //商品id
 	content:"abc"  //评论内容（现在是String，等以后可以做成像发布商品那样，multipartFormData，有图有字）
-	nickname:"abc" //评论者昵称 String 
+	userID:"abc" //评论者昵称 String 
 	time:"String"  //评论时间
 }
 response:
@@ -107,7 +107,7 @@ method；GET
 request:{
 	id:100  //评论的ID，如果没写就是任意id
      	goodID ：2  // 如果没写 就是任意
-	nickname ："abc"  // 评论者昵称 没写就是任意
+	userID ："abc"  // 评论者昵称 没写就是任意
 	page ：2  // 请求第几页，没写就是第一页
       	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
 }
@@ -122,7 +122,7 @@ response:
 			{
 			    id:int 
 			    goodID:int //商品id
-			    nickname:"String" //上传者昵称
+			    userID:"String" //上传者昵称
 			    content:"abc"//描述内容 String
     			    time:"2016-01-02 12:40:00", //上传时间 String
 			 }
@@ -142,7 +142,7 @@ request:
 	phone:"1234567" // 手机 String
 	//手机或邮箱在post的时候只有一个会赋值
 	
-	nickname:"abc"  // 昵称 String 
+	userID:"abc"  // 昵称 String 
 	password:"abc"  // 密码 String
 }
 response:
@@ -161,7 +161,7 @@ request:
 	phone:"1234567" // 手机 String
 	//手机或邮箱在post的时候只有一个会有值
 	
-	nickname:"abc"  // 昵称 String 
+	userID:"abc"  // 昵称 String 
 	
 	//加上 昵称，一共传2个参数。任意一个传入参数都要求在数据库中唯一，否则 状态码  fail。
 	
@@ -177,13 +177,16 @@ response:
 附 用户的全部属性：
 id:int
 gender:String //性别
-nickname:String
+userID:String
 password:String
 phone:String
 email:String
 realname:String //真名
 realID:String   //身份证
 pic:image
+//访问图片的地址：
+img/{id}/portrait.png
+
 type:int 
 1 : normal(default)
 2 : seller //卖东西的
@@ -205,7 +208,7 @@ request:
 {
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
-	nickname:"abc"  // 昵称 String
+	userID:"abc"  // 昵称 String
 	//这三个只有一个会有值
 	
 	password:"abc"  // 密码  	String	
@@ -219,7 +222,7 @@ response:
 		id:int
 		type:int 
 		gender:String //性别
-		nickname:String
+		userID:String
 		password:String
 		phone:String
 		email:String
@@ -236,7 +239,7 @@ method:get
 request:
 {
 	id:int
-	nickname:"abc"  // 昵称 String
+	userID:"abc"  // 昵称 String
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
 	//这4值个只有一个会赋值
@@ -249,7 +252,7 @@ response:
 		id:int
 		type:int 
 		gender:String //性别
-		nickname:String
+		userID:String
 		phone:String
 		email:String
 		realname:String //真名
@@ -261,20 +264,21 @@ response:
 
 ***********************
 
-这个负责 修改密码，修改信息
+这个负责 修改信息（一次一条）
 URL:/api/user/changeInfo
 method:POST
 request:
 {
-	id:123 //
-	
+	id:123 // 要修改的人 的id
+	//下面参数只会有一个有值
 	type:int 
 	gender:String
-	nickname:String
-	oldPassword:String
+	userID:String
 	password:String
 	phone:String
 	email:String
+	realname:String
+	realID:String
 	
 }
 response:
