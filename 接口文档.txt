@@ -264,7 +264,7 @@ response:
 
 ***********************
 
-这个负责 修改信息（一次一条）
+修改信息
 URL:/api/user/changeInfo
 method:POST
 request:
@@ -286,7 +286,24 @@ response:
 	"status":200
 	"message":"OK"
 }
+***********************
 
+修改头像
+URL:/api/user/changePic
+method:POST
+request:
+{
+// 传给你 multipartFormData ，内容是：
+	id:123 // 要修改的人 的id
+	Data   // 图片文件
+	
+	
+}
+response:
+{
+	"status":200
+	"message":"OK"
+}
 
 
 
