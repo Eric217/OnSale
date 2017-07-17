@@ -50,7 +50,8 @@ request:{
      	type ：2  // 如果没写 就是任意type数据
 	page ：2  // 请求第几页，没写就是第一页
       	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
-	userID ：“String” // 上传者昵称，如果没写就是任意
+	userID ：int // 上传者。id
+	location ：“String”／／|
 	isValid:Bool //没写就是任意
 }
 response:
