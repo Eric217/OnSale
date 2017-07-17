@@ -46,7 +46,7 @@ response{
 
 获取商品：
 URL:/api/goods/getGoods
-method；GET
+method；POST
 request:{
 	id : 100  //如果没写，就是任意id
      	type ：2  // 如果没写 就是任意type数据
@@ -109,7 +109,7 @@ method；GET
 request:{
 	id:100  //评论的ID，如果没写就是任意id
      	goodID ：2  // 如果没写 就是任意
-	userID ："abc"  // 评论者昵称 没写就是任意
+	userID ：int  // 评论者id 没写就是任意
 	page ：2  // 请求第几页，没写就是第一页
       	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
 }
