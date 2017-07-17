@@ -70,7 +70,7 @@ response:
 			    location:"location" // 地点 String
 			    longitude:double  //经度
   			    latitude:double   //纬度
-    			    time:"2016-01-02 12:40:00", //上传时间 String
+    			    date:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
 			    isValid:Bool
 			    userID:"String" // 上传者昵称
@@ -124,7 +124,7 @@ response:
 			    goodID:int //商品id
 			    userID:"String" //上传者昵称
 			    content:"abc"//描述内容 String
-    			    time:"2016-01-02 12:40:00", //上传时间 String
+    			    date:"2016-01-02 12:40:00", //上传时间 String
 			 }
 		    ...
 		]
