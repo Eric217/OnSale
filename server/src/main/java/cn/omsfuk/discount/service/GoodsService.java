@@ -7,6 +7,7 @@ import cn.omsfuk.discount.dao.CommentDao;
 import cn.omsfuk.discount.dao.GoodsDao;
 import cn.omsfuk.discount.dto.GoodsDto;
 import cn.omsfuk.discount.util.SessionUtil;
+import cn.omsfuk.discount.vo.GoodsVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -50,7 +54,9 @@ public class GoodsService {
 
     public Result getGoods(Integer id, Integer userId, String loc0, String loc1, String loc2,
                            Integer isValid, Integer begin, Integer rows) {
-        return ResultCache.getOk(goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows));
+        List<GoodsDto> goodsDtos = goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows);
+        List<GoodsVo> goodsVos = goodsDtos.stream().map(GoodsVo::new).collect(Collectors.toList());
+        return ResultCache.getOk(goodsVos);
     }
 
     private String transferToUrl(File file) {

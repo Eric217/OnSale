@@ -1,5 +1,6 @@
 package cn.omsfuk.discount.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,8 +31,10 @@ public class GoodsDto {
 
     private Double latitude;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp date;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp deadline;
 
     private Integer isValid;

@@ -47,16 +47,17 @@ public class AuthService {
     }
 
     private Result register(UserDto user) {
+        userDao.insertUser(user);
         fileService.initUserDir(user);
-        return ResultCache.getOk(userDao.insertUser(user));
+        return ResultCache.OK;
     }
 
-    public Result registerWithEmail(String email, String nickname, String password) {
-        return register(new UserDto(nickname, null, null, null, email, null, password, Role.NORMAL));
+    public Result registerWithEmail(String email, String nickname, String password, String gender) {
+        return register(new UserDto(nickname, gender, null, null, email, null, password, Role.NORMAL));
     }
 
-    public Result registerWithPhone(String phone, String nickname, String password) {
-        return register(new UserDto(nickname, null, null, null, null, phone, password, Role.NORMAL));
+    public Result registerWithPhone(String phone, String nickname, String password, String gender) {
+        return register(new UserDto(nickname, gender, null, null, null, phone, password, Role.NORMAL));
     }
 
     public Result validate(String email, String phone, String nickname) {

@@ -3,8 +3,10 @@
 <mapper namespace="cn.omsfuk.discount.dao.GoodsDao">
 
     <insert id="insertGoods">
-        INSERT goods(`type`, title, description, location, longitude, latitude, `date`, deadline, isValid, user_id, pic)
-        VALUES (`type`, title, description, location, longitude, latitude, NOW(), deadline, 1, user_id, pic)
+        INSERT goods(`type`, title, description, loc0, loc1, loc2, longitude, latitude,
+        `date`, deadline, is_valid, user_id, pic)
+        VALUES (#{type}, #{title}, #{description}, #{loc0}, #{loc1}, #{loc2},
+        #{longitude}, #{latitude}, current_timestamp(), #{deadline}, 1, #{userId}, #{pic})
     </insert>
 
     <select id="getGoods" resultType="cn.omsfuk.discount.dto.GoodsDto">

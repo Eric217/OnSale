@@ -2,6 +2,7 @@ package cn.omsfuk.discount.vo;
 
 import cn.omsfuk.discount.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,10 +16,11 @@ public class UserVo {
 
     private Integer id;
 
-    private String nickname;
+    private String nickName;
 
     private String realName;
 
+    @JsonProperty("readID")
     private String realId;
 
     private String gender;
@@ -35,8 +37,8 @@ public class UserVo {
     public UserVo() {
     }
 
-    public UserVo(String nickname, String realName, String realId, String gender, String email, String phone, String password, Role role) {
-        this.nickname = nickname;
+    public UserVo(String nickName, String realName, String realId, String gender, String email, String phone, String password, Role role) {
+        this.nickName = nickName;
         this.realName = realName;
         this.realId = realId;
         this.gender = gender;

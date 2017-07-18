@@ -5,7 +5,6 @@ import cn.omsfuk.discount.base.ResultCache;
 import cn.omsfuk.discount.dto.UserDto;
 import cn.omsfuk.discount.service.AuthService;
 import cn.omsfuk.discount.util.ObjectUtil;
-import cn.omsfuk.discount.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,11 +35,11 @@ public class AuthController {
     }
 
     @RequestMapping(value = "user/signUp", method = RequestMethod.POST)
-    public Result signUp(String email, String phone, String nickname, String password) {
-        if (ObjectUtil.notNull(email, password, nickname)) {
-            return authService.registerWithEmail(email, nickname, password);
-        } else if (ObjectUtil.notNull(phone, password, nickname)) {
-            return authService.registerWithPhone(phone, nickname, password);
+    public Result signUp(String email, String phone, String nickName, String password, String gender) {
+        if (ObjectUtil.notNull(email, password, nickName, gender)) {
+            return authService.registerWithEmail(email, nickName, password, gender);
+        } else if (ObjectUtil.notNull(phone, password, nickName)) {
+            return authService.registerWithPhone(phone, nickName, password, gender);
         } else {
             return ResultCache.getFailure("wrong parameter format");
         }

@@ -13,13 +13,13 @@ CREATE TABLE `user` (
   `realname` varchar(20),
   `real_id` char(18),
   `phone` varchar(11),
-  `nickname` varchar(255) NOT NULL,
+  `nickName` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phone` (`phone`),
-  UNIQUE KEY `nickname` (`nickname`)
+  UNIQUE KEY `nickName` (`nickName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS role;
@@ -98,21 +98,21 @@ INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 1);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 2);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 3);
 
-INSERT user(`nickname`, `phone`, `password`, `role_id`) VALUES("omsfuk", "110", "admin", 2);
+INSERT user(`nickName`, `phone`, `password`, `role_id`) VALUES("omsfuk", "110", "admin", 2);
 
-INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '济南', 'ALL', NOW(), NOW(), 1);
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '济南', 'ALL', current_timestamp(), current_timestamp(), 1);
 
-INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '青岛', 'ALL', NOW(), NOW(), 1);
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '青岛', 'ALL', current_timestamp(), current_timestamp(), 1);
 
-INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '潍坊', 'ALL', NOW(), NOW(), 1);
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '潍坊', 'ALL', current_timestamp(), current_timestamp(), 1);
  
 
 
-INSERT comment(content, goods_id, user_id, date) values("aaa", 1, 1, now());
+INSERT comment(content, goods_id, user_id, date) values("aaa", 1, 1, current_timestamp());
 
-INSERT comment(content, goods_id, user_id, date) values("bbb", 1, 1, now());
+INSERT comment(content, goods_id, user_id, date) values("bbb", 1, 1, current_timestamp());
 
-INSERT comment(content, goods_id, user_id, date) values("ccc", 1, 1, now());
+INSERT comment(content, goods_id, user_id, date) values("ccc", 1, 1, current_timestamp());
 
-INSERT comment(content, goods_id, user_id, date) values("ddd", 1, 1, now());
+INSERT comment(content, goods_id, user_id, date) values("ddd", 1, 1, current_timestamp());
 

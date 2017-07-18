@@ -32,7 +32,7 @@ public class GoodsController {
     @RequestMapping(value = "upload")
     public Result upload(Integer type, String title, String description, String loc0, String loc1, String loc2,
                          Double longitude, Double latitude, Timestamp deadline, MultipartFile[] pic) {
-        if (!ObjectUtil.notNull(type, loc0, loc1, loc2, longitude, latitude, longitude, deadline, pic)) {
+        if (!ObjectUtil.notNull(type, loc0, loc1, loc2, longitude, latitude, deadline, pic)) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
         }
         return goodsService.uploadGoods(type, title, description, loc0, loc1, loc2, longitude, latitude, deadline, pic);

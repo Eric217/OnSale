@@ -12,7 +12,7 @@
 	status:300,message:"failure"  				//代表失败
 }
 
-*******************上传新商品:**************************
+*******************上传新商品**************************
 
 URL:/api/goods/upload
 method:POST（multipartFormData）

@@ -1,5 +1,7 @@
 package cn.omsfuk.discount.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -13,12 +15,15 @@ public class CommentDto {
 
     private Integer id;
 
-    private Integer GoodsId;
+    @JsonProperty("goodsID")
+    private Integer goodsId;
 
+    @JsonProperty("userID")
     private Integer userId;
 
     private String content;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp date;
 
     public CommentDto() {
@@ -26,7 +31,7 @@ public class CommentDto {
 
     public CommentDto(Integer goodsId, Integer userId, String content) {
         this.id = id;
-        GoodsId = goodsId;
+        this.goodsId = goodsId;
         this.userId = userId;
         this.content = content;
         this.date = date;
