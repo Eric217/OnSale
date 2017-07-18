@@ -69,9 +69,21 @@ response:
 				date:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
 			    isValid:int
+			    user:{
 				userID: 上传者ID
 			    nickName: 上传者昵称
+			   	mark:int
+			    ...
+			   
+			    
+			    }
+			 
 			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
+			    
+			    
+			  
+		    
+			    
 		    }
 		    ...
 		]
@@ -113,8 +125,13 @@ response:
 			{
 			    id:int 
 			    goodID:int //商品id
-			    userID:int //评论者ID
-			    nickName: 评论者昵称
+			    user{
+			        userID:int //评论者ID
+			        nickName: 评论者昵称
+			    ...
+			    }
+		
+			    
 			    content:"abc"//描述内容 String
     			    date:"2016-01-02 12:40:00", //上传时间 String
 			 }
@@ -177,6 +194,7 @@ response:
 	message:"OK"
 	data:{
 		id:int
+		mark:int
 		type:int 
 		gender:String //性别
 		nickName:String
@@ -204,6 +222,7 @@ response:
 	message:"OK"
 	data:{
 		id:int
+		mark:int
 		type:int 
 		gender:String //性别
 		nickName:String
@@ -211,7 +230,8 @@ response:
 		email:String
 		realName:String //真名
 		realID:String   //身份证
-		pic:String //头像图片的 url，
+		pic:String //头像图片的 url
+		...
 	}
 }
 
@@ -253,6 +273,7 @@ response:
 ***************************附录****************************
 用户的全部属性：
 id:int
+mark:int//第一次100分，普通10分，评论1分
 gender:String //性别
 userID:String
 password:String
@@ -261,6 +282,7 @@ email:String
 realName:String //真名
 realID:String   //身份证
 pic:image
+
 //访问图片的地址：
 img/{id}/portrait.png
 
