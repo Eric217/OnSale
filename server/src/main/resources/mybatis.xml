@@ -20,6 +20,7 @@
 
     <typeAliases>
         <typeAlias type="cn.omsfuk.discount.vo.UserVo" alias="user"/>
+        <typeAlias type="cn.omsfuk.discount.dto.CommentDto" alias="comment"/>
     </typeAliases>
 
 </configuration>

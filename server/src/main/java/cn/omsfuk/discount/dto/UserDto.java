@@ -13,7 +13,9 @@ public class UserDto {
 
     private Integer id;
 
-    private String nickname;
+    private Integer type;
+
+    private String nickName;
 
     private String realName;
 
@@ -32,8 +34,8 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String nickname, String gender, String realName, String realId, String email, String phone, String password, Integer roleId) {
-        this.nickname = nickname;
+    public UserDto(String nickName, String gender, String realName, String realId, String email, String phone, String password, Integer roleId) {
+        this.nickName = nickName;
         this.gender = gender;
         this.realName = realName;
         this.realId = realId;

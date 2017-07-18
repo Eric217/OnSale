@@ -20,7 +20,11 @@ public class GoodsDto {
 
     private String description;
 
-    private String location;
+    private String loc0;
+
+    private String loc1;
+
+    private String loc2;
 
     private Double longitude;
 
@@ -39,13 +43,15 @@ public class GoodsDto {
     public GoodsDto() {
     }
 
-    public GoodsDto(Integer type, String title, String description, String location,
+    public GoodsDto(Integer type, String title, String description, String loc0, String loc1, String loc2,
                     Double longitude, Double latitude, Timestamp date, Timestamp deadline,
                     Integer isValid, Integer userId, String pic) {
         this.type = type;
         this.title = title;
         this.description = description;
-        this.location = location;
+        this.loc0 = loc0;
+        this.loc1 = loc1;
+        this.loc2 = loc2;
         this.longitude = longitude;
         this.latitude = latitude;
         this.date = date;

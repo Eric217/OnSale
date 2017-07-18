@@ -17,6 +17,8 @@ public final class ResultCache {
 
     public static final Result PERMISSION_DENIED = new Result(400, MSG_PERMISSION_DENIED, null);
 
+    public static final Result WRONG_PARAMETER_FORMAT = new Result(300, "wrong parameter format", null);
+
     public static Result getOk(Object object) {
         return new Result(200, MSG_OK, object);
     }

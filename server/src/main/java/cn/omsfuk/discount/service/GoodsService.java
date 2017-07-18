@@ -2,9 +2,12 @@ package cn.omsfuk.discount.service;
 
 import cn.omsfuk.discount.base.Result;
 import cn.omsfuk.discount.base.ResultCache;
+import cn.omsfuk.discount.dto.CommentDto;
+import cn.omsfuk.discount.dao.CommentDao;
 import cn.omsfuk.discount.dao.GoodsDao;
 import cn.omsfuk.discount.dto.GoodsDto;
 import cn.omsfuk.discount.util.SessionUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +29,10 @@ public class GoodsService {
     @Autowired
     private GoodsDao goodsDao;
 
-    public Result uploadGoods(Integer type, String title, String description, String location,
+    @Autowired
+    private CommentDao commentDao;
+
+    public Result uploadGoods(Integer type, String title, String description, String loc0, String loc1, String loc2,
                               Double longitude, Double latitude, Timestamp deadline, MultipartFile[] picFiles) {
         File[] files = fileService.writePic(picFiles);
         if (files == null) {
@@ -38,12 +44,26 @@ public class GoodsService {
             sb.append(transferToUrl(file)).append(';');
         });
         String pic = sb.toString();
-        goodsDao.insertGoods(new GoodsDto(type, title, description, location, longitude, latitude, null, deadline, null, SessionUtil.user().getId(), pic));
+        goodsDao.insertGoods(new GoodsDto(type, title, description, loc0, loc1, loc2, longitude, latitude, null, deadline, null, SessionUtil.user().getId(), pic));
         return ResultCache.OK;
+    }
+
+    public Result getGoods(Integer id, Integer userId, String loc0, String loc1, String loc2,
+                           Integer isValid, Integer begin, Integer rows) {
+        return ResultCache.getOk(goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows));
     }
 
     private String transferToUrl(File file) {
         return file.getName();
+    }
+
+    public Result comment(Integer goodsId, String conent) {
+        commentDao.insertComment(new CommentDto(goodsId, SessionUtil.user().getId(), conent));
+        return ResultCache.OK;
+    }
+
+    public Result getComment(Integer id, Integer userId, Integer goodsId, Integer begin, Integer rows) {
+        return ResultCache.getOk(commentDao.getComment(id, userId, goodsId, begin, rows));
     }
 
 }

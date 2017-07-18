@@ -7,8 +7,10 @@ import cn.omsfuk.discount.dto.UserDto;
 import cn.omsfuk.discount.util.SessionUtil;
 import cn.omsfuk.discount.vo.UserVo;
 import cn.omsfuk.discount.model.Role;
+import com.mysql.cj.api.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by omsfuk on 2017/7/17.
@@ -39,6 +41,7 @@ public class AuthService {
             return ResultCache.getFailure("wrong password");
         }
         SessionUtil.setAttribute("user", user);
+        SessionUtil.setAttribute("login", "true");
         // TODO 返回用户信息
         return ResultCache.getOk(user);
     }
@@ -75,5 +78,32 @@ public class AuthService {
         return ResultCache.OK;
     }
 
+    public Result getUserInfo(Integer id, String nickName, String email, String phone) {
+        if (id != null) {
+            return ResultCache.getOk(userDao.getUserById(id));
+        }
+        if (nickName != null) {
+            return ResultCache.getOk(userDao.getUserByNickName(nickName));
+        }
+        if (email != null) {
+            return ResultCache.getOk(userDao.getUserByEmail(email));
+        }
+        if (phone != null) {
+            return ResultCache.getOk(userDao.getUserByPhone(phone));
+        }
+        return ResultCache.WRONG_PARAMETER_FORMAT;
+    }
 
+    public Result updateUser(UserDto user) {
+        user.setId(SessionUtil.user().getId());
+        return ResultCache.getOk(userDao.updateUser(user));
+    }
+
+    public Result changePortrait(MultipartFile data) {
+        if (fileService.overridePortrait(data)) {
+            return ResultCache.OK;
+        } else {
+            return ResultCache.FAILURE;
+        }
+    }
 }

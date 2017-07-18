@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.CommentDao">
+
+    <insert id="insertComment">
+        INSERT commentDto(goods_id, user_id, content, `date`)
+        VALUES (#{goodsId}, #{userId}, #{conent}, NOW())
+    </insert>
+
+    <select id="getComment" resultType="comment">
+        SELECT *
+        FROM comment
+        WHERE
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="userId!= null">
+            user_id = #{userId} and
+        </if>
+        <if test="goodsId != null">
+            goods_id = #{goodsId} and
+        </if>
+        1 = 1
+        LIMIT #{begin}, #{rows}
+    </select>
+</mapper>

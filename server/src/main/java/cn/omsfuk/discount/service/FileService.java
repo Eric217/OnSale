@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Created by omsfuk on 2017/7/17.
@@ -57,7 +58,7 @@ public class FileService implements ServletContextAware {
         File[] savedFiles = new File[files.length];
         UserVo user = SessionUtil.user();
         for (int i = 0; i < files.length; i++) {
-            savedFiles[i] = new File(basePath + user.getId() + "/" + System.nanoTime() + ".png");
+            savedFiles[i] = new File(basePath + user.getId() + "/" + UUID.randomUUID() + ".png");
             try {
                 files[i].transferTo(savedFiles[i]);
             } catch (IOException e) {

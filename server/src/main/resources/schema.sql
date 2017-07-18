@@ -7,7 +7,11 @@ USE discount;
 DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` int(11) DEFAULT 1,
+  `gender` varchar(5) DEFAULT '男',
   `email` varchar(50),
+  `realname` varchar(20),
+  `real_id` char(18),
   `phone` varchar(11),
   `nickname` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -48,14 +52,16 @@ CREATE TABLE `role_privilege` (
 
 DROP TABLE IF EXISTS goods;
 CREATE TABLE `goods` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text,
-  `location` varchar(255) DEFAULT NULL,
+  `loc0` varchar(255) DEFAULT NULL,
+  `loc1` varchar(255) DEFAULT NULL,
+  `loc2` varchar(255) DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
-  `time` datetime NOT NULL,
+  `date` datetime NOT NULL,
   `deadline` datetime NOT NULL,
   `is_valid` tinyint(4) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
@@ -63,7 +69,7 @@ CREATE TABLE `goods` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `goods_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS comment;
 CREATE TABLE `comment` (
@@ -93,3 +99,20 @@ INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 2);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 3);
 
 INSERT user(`nickname`, `phone`, `password`, `role_id`) VALUES("omsfuk", "110", "admin", 2);
+
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '济南', 'ALL', NOW(), NOW(), 1);
+
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '青岛', 'ALL', NOW(), NOW(), 1);
+
+INSERT goods(type, loc0, loc1, loc2, date, deadline, user_id) values(1, '山东', '潍坊', 'ALL', NOW(), NOW(), 1);
+ 
+
+
+INSERT comment(content, goods_id, user_id, date) values("aaa", 1, 1, now());
+
+INSERT comment(content, goods_id, user_id, date) values("bbb", 1, 1, now());
+
+INSERT comment(content, goods_id, user_id, date) values("ccc", 1, 1, now());
+
+INSERT comment(content, goods_id, user_id, date) values("ddd", 1, 1, now());
+

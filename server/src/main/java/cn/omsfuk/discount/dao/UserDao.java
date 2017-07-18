@@ -22,4 +22,6 @@ public interface UserDao {
 
     UserVo getUserByNickName(@Param("nickName") String nickName);
 
+    int updateUser(UserDto user);
+
 }

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 /**
  * Created by omsfuk on 2017/7/17.
@@ -29,24 +30,35 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @RequestMapping(value = "upload")
-    public Result upload(Integer type, String title, String description, String location,
+    public Result upload(Integer type, String title, String description, String loc0, String loc1, String loc2,
                          Double longitude, Double latitude, Timestamp deadline, MultipartFile[] pic) {
-        System.out.println(pic);
-        if (!ObjectUtil.notNull(type, location, longitude, latitude, longitude, deadline, pic)) {
-            return ResultCache.getFailure("wrong parameter format");
+        if (!ObjectUtil.notNull(type, loc0, loc1, loc2, longitude, latitude, longitude, deadline, pic)) {
+            return ResultCache.WRONG_PARAMETER_FORMAT;
         }
-        return goodsService.uploadGoods(type, title, description, location, longitude, latitude, deadline, pic);
+        return goodsService.uploadGoods(type, title, description, loc0, loc1, loc2, longitude, latitude, deadline, pic);
     }
 
-    @RequestMapping(value = "getGoods", method = RequestMethod.GET)
-    public Result getGoods(Integer id, @RequestParam(value = "page", defaultValue = "1") Integer page,
+    @RequestMapping(value = "getGoods", method = RequestMethod.POST)
+    public Result getGoods(Integer id,
+                           @RequestParam(value = "page", defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                           String l1, String l2, String l3,
                            Integer userID, Integer isValid) {
-        return null;
+        return goodsService.getGoods(id, userID, l1, l2, l3, isValid, (page - 1) * rows, rows);
     }
 
     @RequestMapping(value = "comment", method = RequestMethod.POST)
-    public Result comment(Integer goodsID, ) {
+    public Result comment(Integer goodsID, String content) {
+        if (!ObjectUtil.notNull(goodsID, content)) {
+            return ResultCache.WRONG_PARAMETER_FORMAT;
+        }
+        return goodsService.comment(goodsID, content);
+    }
 
+    @RequestMapping(value = "getComment", method = RequestMethod.GET)
+    public Result getComment(Integer id, Integer goodsID, Integer userID,
+                             @RequestParam(value = "page", defaultValue = "1") Integer page,
+                             @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
+        return goodsService.getComment(id, userID, goodsID, (page - 1) * rows, rows);
     }
 }

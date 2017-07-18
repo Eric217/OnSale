@@ -7,4 +7,41 @@
         VALUES (`type`, title, description, location, longitude, latitude, NOW(), deadline, 1, user_id, pic)
     </insert>
 
+    <select id="getGoods" resultType="cn.omsfuk.discount.dto.GoodsDto">
+        SELECT *
+        FROM goods
+        WHERE
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="userId != null">
+            user_id = #{userId} and
+        </if>
+        <if test="isValid != null">
+            is_valid = #{isValid} and
+        </if>
+
+        <choose>
+            <when test="loc2 != null">
+                loc0 = #{loc0} and loc1 = #{loc1} and loc2 =#{loc2}
+            </when>
+            <otherwise>
+                <choose>
+                    <when test="loc1 != null">
+                        loc0 = #{loc0} and loc1 = #{loc1}
+                    </when>
+                    <otherwise>
+                        <choose>
+                            <when test="loc0 != null">
+                                loc0 = #{loc0}
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+        and 1 = 1
+        LIMIT #{begin}, #{rows}
+    </select>
+
 </mapper>

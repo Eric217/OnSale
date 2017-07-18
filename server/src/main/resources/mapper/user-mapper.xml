@@ -13,6 +13,18 @@
         INSERT USER(email, phone, nickname, password, role_id)
         VALUES(#{email}, #{phone}, #{nickname}, #{password}, #{roleId})
     </insert>
+    <update id="updateUser" parameterType="cn.omsfuk.discount.dto.UserDto">
+        UPDATE user SET
+        `type` = #{type},
+        gender = #{gender},
+        nickname = #{nickName},
+        password = #{password},
+        email = #{email},
+        realname = #{realName},
+        real_id = #{realId},
+        phone = #{phone}
+        WHERE id = #{id}
+    </update>
 
     <select id="getUserById" resultMap="user">
         SELECT *

@@ -1,4 +1,4 @@
-package cn.omsfuk.discount.dao;
+package cn.omsfuk.discount.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 
 @Data
-public class Comment {
+public class CommentDto {
 
     private Integer id;
 
@@ -21,10 +21,10 @@ public class Comment {
 
     private Timestamp date;
 
-    public Comment() {
+    public CommentDto() {
     }
 
-    public Comment(Integer id, Integer goodsId, Integer userId, String content, Timestamp date) {
+    public CommentDto(Integer goodsId, Integer userId, String content) {
         this.id = id;
         GoodsId = goodsId;
         this.userId = userId;
