@@ -46,6 +46,7 @@ request:{
 	l1: 一级
 	l2: 二级
 	l3: 三级
+	title:String
 	isValid: int //没写就是任意。1代表有效，0代表已过期
 }
 response:
@@ -263,6 +264,58 @@ response:
 	"status":200
 	"message":"OK"
 }
+**********************访问收藏夹**************************
+URL:/api/user/getCollection
+method:GET
+request {
+	userID:int
+	page:
+	rows:
+}
+
+response:
+{
+	"status":200
+	"message":"OK"
+	"data":
+	{
+		total: 100
+		data: [
+			{
+			    id:132
+			    type:1, //商品种类 int 
+			    title:"title",//描述题目 String
+			    description:"description"//描述内容 String
+			    l1: 一级
+			    l2: 二级
+			    l3: 三级
+			    longitude:double  //经度
+  			    latitude:double   //纬度
+			    date:"2016-01-02 12:40:00", //上传时间 String
+			    deadline:"2018-08-09 09:09:09",//  截止String
+			    isValid:int
+			    userID: 上传者ID
+			    nickName: 上传者昵称
+			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
+		    }
+		    ...
+		]
+	}
+}
+
+**********************添加到收藏夹**************************
+URL:/api/user/addCollection
+method:POST
+request {
+	goodsID:int
+}
+response {
+	status:200
+	message:OK
+}
+
+
+
 
 ***************************附录****************************
 用户的全部属性：
