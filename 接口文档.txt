@@ -20,8 +20,8 @@ method:POST（multipartFormData）
     title:"title",//描述题目 String
     description:"description"//描述内容 String
     l1:一级，省
-	l2:二级，市
-	l3:三级，区
+    l2:二级，市
+    l3:三级，区
     longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
@@ -39,9 +39,9 @@ URL:/api/goods/getGoods
 method；POST
 request:{
 	id : 100  //如果没写，就是任意id
-    type ：2  // 如果没写 就是任意type数据
+	type ：2  // 如果没写 就是任意type数据
 	page ：2  // 请求第几页，没写就是第一页
-    rows ：10 // 请求几条，没写就是第一条，最多一整页10条
+	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
 	userID ：int // 上传者。id
 	l1: 一级
 	l2: 二级
@@ -62,27 +62,21 @@ response:
 			    title:"title",//描述题目 String
 			    description:"description"//描述内容 String
 			    l1: 一级
-				l2: 二级
-				l3: 三级
+			    l2: 二
+			    l3: 三级
 			    longitude:double  //经度
   			    latitude:double   //纬度
-				date:"2016-01-02 12:40:00", //上传时间 String
+			    date:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
 			    isValid:int
 			    user:{
 				userID: 上传者ID
-			    nickName: 上传者昵称
+				nickName: 上传者昵称
 			   	mark:int
-			    ...
-			   
-			    
+				...
 			    }
 			 
 			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
-			    
-			    
-			  
-		    
 			    
 		    }
 		    ...
