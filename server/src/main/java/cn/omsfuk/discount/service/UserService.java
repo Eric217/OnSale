@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 @Service
-public class AuthService {
+public class UserService {
 
     @Autowired
     private UserDao userDao;

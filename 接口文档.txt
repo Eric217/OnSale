@@ -265,7 +265,7 @@ response:
 	"message":"OK"
 }
 **********************访问收藏夹**************************
-URL:/api/normal/user/getCollection
+URL:/api/normal/favorite/getFavorite
 method:GET
 request {
 	page:
@@ -303,7 +303,7 @@ response:
 }
 
 **********************添加到收藏夹**************************
-URL:/api/normal/user/addCollection
+URL:/api/normal/favorite/addFavorite
 method:POST
 request {
 	goodsID:int
