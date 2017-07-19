@@ -20,8 +20,8 @@ method:POST（multipartFormData）
     title:"title",//描述题目 String
     description:"description"//描述内容 String
     l1:一级，省
-	l2:二级，市
-	l3:三级，区
+    l2:二级，市
+    l3:三级，区
     longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
@@ -39,14 +39,18 @@ URL:/api/goods/getGoods
 method；POST
 request:{
 	id : 100  //如果没写，就是任意id
-    type ：2  // 如果没写 就是任意type数据
+	type ：2  // 如果没写 就是任意type数据
 	page ：2  // 请求第几页，没写就是第一页
-    rows ：10 // 请求几条，没写就是第一条，最多一整页10条
+	rows ：10 // 请求几条，没写就是第一条，最多一整页10条
 	userID ：int // 上传者。id
 	l1: 一级
 	l2: 二级
 	l3: 三级
+<<<<<<< HEAD
 	title: String
+=======
+	title:String
+>>>>>>> a2abf8850343291b058e9f2f8d33d348740d1208
 	isValid: int //没写就是任意。1代表有效，0代表已过期
 }
 response:
@@ -63,16 +67,22 @@ response:
 			    title:"title",//描述题目 String
 			    description:"description"//描述内容 String
 			    l1: 一级
-				l2: 二级
-				l3: 三级
+			    l2: 二
+			    l3: 三级
 			    longitude:double  //经度
   			    latitude:double   //纬度
-				date:"2016-01-02 12:40:00", //上传时间 String
+			    date:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
 			    isValid:int
+			    user:{
 				userID: 上传者ID
-			    nickName: 上传者昵称
+				nickName: 上传者昵称
+			   	mark:int
+				...
+			    }
+			 
 			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
+			    
 		    }
 		    ...
 		]
@@ -114,8 +124,13 @@ response:
 			{
 			    id:int 
 			    goodID:int //商品id
-			    userID:int //评论者ID
-			    nickName: 评论者昵称
+			    user{
+			        userID:int //评论者ID
+			        nickName: 评论者昵称
+			    ...
+			    }
+		
+			    
 			    content:"abc"//描述内容 String
     			    date:"2016-01-02 12:40:00", //上传时间 String
 			 }
@@ -178,6 +193,7 @@ response:
 	message:"OK"
 	data:{
 		id:int
+		mark:int
 		type:int 
 		gender:String //性别
 		nickName:String
@@ -205,6 +221,7 @@ response:
 	message:"OK"
 	data:{
 		id:int
+		mark:int
 		type:int 
 		gender:String //性别
 		nickName:String
@@ -212,7 +229,8 @@ response:
 		email:String
 		realName:String //真名
 		realID:String   //身份证
-		pic:String //头像图片的 url，
+		pic:String //头像图片的 url
+		...
 	}
 }
 
@@ -250,10 +268,63 @@ response:
 	"status":200
 	"message":"OK"
 }
+**********************访问收藏夹**************************
+URL:/api/user/getCollection
+method:GET
+request {
+	userID:int
+	page:
+	rows:
+}
+
+response:
+{
+	"status":200
+	"message":"OK"
+	"data":
+	{
+		total: 100
+		data: [
+			{
+			    id:132
+			    type:1, //商品种类 int 
+			    title:"title",//描述题目 String
+			    description:"description"//描述内容 String
+			    l1: 一级
+			    l2: 二级
+			    l3: 三级
+			    longitude:double  //经度
+  			    latitude:double   //纬度
+			    date:"2016-01-02 12:40:00", //上传时间 String
+			    deadline:"2018-08-09 09:09:09",//  截止String
+			    isValid:int
+			    userID: 上传者ID
+			    nickName: 上传者昵称
+			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
+		    }
+		    ...
+		]
+	}
+}
+
+**********************添加到收藏夹**************************
+URL:/api/user/addCollection
+method:POST
+request {
+	goodsID:int
+}
+response {
+	status:200
+	message:OK
+}
+
+
+
 
 ***************************附录****************************
 用户的全部属性：
 id:int
+mark:int//第一次100分，普通10分，评论1分
 gender:String //性别
 userID:String
 password:String
@@ -262,6 +333,7 @@ email:String
 realName:String //真名
 realID:String   //身份证
 pic:image
+
 //访问图片的地址：
 img/{id}/portrait.png
 

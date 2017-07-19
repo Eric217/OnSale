@@ -24,4 +24,11 @@ public interface GoodsDao {
                            @Param("isValid") Integer isValid,
                            @Param("begin") Integer begin,
                            @Param("rows") Integer rows);
+
+    int getGoodsCount(@Param("id") Integer id,
+                                @Param("userId") Integer userId,
+                                @Param("loc0") String loc0,
+                                @Param("loc1") String loc1,
+                                @Param("loc2") String loc2,
+                                @Param("isValid") Integer isValid);
 }

@@ -19,6 +19,12 @@
         <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
 
+    <select id="getGoodsByFavorite" parameterType="int" resultMap="goods">
+        SELECT *
+        FROM goods
+        WHERE id in (SELECT goods_id FROM favorite WHERE user_id = #{user_id})
+    </select>
+
     <insert id="insertGoods">
         INSERT goods(`type`, title, description, loc0, loc1, loc2, longitude, latitude,
         `date`, deadline, is_valid, user_id, pic)
@@ -61,6 +67,41 @@
         </choose>
         and 1 = 1
         LIMIT #{begin}, #{rows}
+    </select>
+    <select id="getGoodsCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM goods
+        WHERE
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="userId != null">
+            user_id = #{userId} and
+        </if>
+        <if test="isValid != null">
+            is_valid = #{isValid} and
+        </if>
+
+        <choose>
+            <when test="loc2 != null">
+                loc0 = #{loc0} and loc1 = #{loc1} and loc2 =#{loc2}
+            </when>
+            <otherwise>
+                <choose>
+                    <when test="loc1 != null">
+                        loc0 = #{loc0} and loc1 = #{loc1}
+                    </when>
+                    <otherwise>
+                        <choose>
+                            <when test="loc0 != null">
+                                loc0 = #{loc0}
+                            </when>
+                        </choose>
+                    </otherwise>
+                </choose>
+            </otherwise>
+        </choose>
+        and 1 = 1
     </select>
 
 </mapper>

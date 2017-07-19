@@ -8,6 +8,7 @@ import cn.omsfuk.discount.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,4 +68,19 @@ public class AuthController {
         }
         return authService.changePortrait(data);
     }
+
+    @RequestMapping(value = "user/addCollection", method = RequestMethod.GET)
+    public Result addCollection(Integer goodsID) {
+        if (goodsID == null) {
+            return ResultCache.WRONG_PARAMETER_FORMAT;
+        }
+        return authService.addFavorite(goodsID);
+    }
+
+    @RequestMapping(value = "user/getCollection", method = RequestMethod.GET)
+    public Result getCollection(@RequestParam(defaultValue = "1") Integer page,
+                                @RequestParam(defaultValue = "10") Integer rows) {
+        return authService.getFavorite((page - 1) * rows, rows);
+    }
+
 }

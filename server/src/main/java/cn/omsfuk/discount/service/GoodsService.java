@@ -7,7 +7,9 @@ import cn.omsfuk.discount.dao.CommentDao;
 import cn.omsfuk.discount.dao.GoodsDao;
 import cn.omsfuk.discount.dto.GoodsDto;
 import cn.omsfuk.discount.util.SessionUtil;
+import cn.omsfuk.discount.vo.CommentVo;
 import cn.omsfuk.discount.vo.GoodsVo;
+import cn.omsfuk.discount.vo.MultiRowsResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,9 +56,10 @@ public class GoodsService {
 
     public Result getGoods(Integer id, Integer userId, String loc0, String loc1, String loc2,
                            Integer isValid, Integer begin, Integer rows) {
+        int total = goodsDao.getGoodsCount(id, userId, loc0, loc1, loc2, isValid);
         List<GoodsVo> goodsVos = goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows);
         goodsVos.stream().forEach(GoodsVo::transferPic);
-        return ResultCache.getOk(goodsVos);
+        return ResultCache.getOk(new MultiRowsResult(total, goodsVos));
     }
 
     private String transferToUrl(File file) {
@@ -69,7 +72,9 @@ public class GoodsService {
     }
 
     public Result getComment(Integer id, Integer userId, Integer goodsId, Integer begin, Integer rows) {
-        return ResultCache.getOk(commentDao.getComment(id, userId, goodsId, begin, rows));
+        int total = commentDao.getCommentCount(id, userId, goodsId);
+        List<CommentDto> commentDtos = commentDao.getComment(id, userId, goodsId, begin, rows);
+        return ResultCache.getOk(new MultiRowsResult(total, commentDtos));
     }
 
 }

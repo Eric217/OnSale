@@ -20,4 +20,8 @@ public interface CommentDao {
                              @Param("goodsId") Integer goodsId,
                              @Param("begin") Integer begin,
                              @Param("rows") Integer rows);
+
+    int getCommentCount(@Param("id") Integer id,
+                   @Param("userId") Integer userId,
+                   @Param("goodsId") Integer goodsId);
 }

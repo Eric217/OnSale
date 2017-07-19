@@ -13,7 +13,7 @@
         VALUES (#{goodsId}, #{userId}, #{conent}, current_timestamp())
     </insert>
 
-    <select id="getComment" resultType="comment">
+    <select id="getComment" resultType="cn.omsfuk.discount.dto.CommentDto">
         SELECT *
         FROM comment
         WHERE
@@ -28,5 +28,20 @@
         </if>
         1 = 1
         LIMIT #{begin}, #{rows}
+    </select>
+    <select id="getCommentCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM comment
+        WHERE
+        <if test="id != null">
+            id = #{id} and
+        </if>
+        <if test="userId!= null">
+            user_id = #{userId} and
+        </if>
+        <if test="goodsId != null">
+            goods_id = #{goodsId} and
+        </if>
+        1 = 1
     </select>
 </mapper>
