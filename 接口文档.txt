@@ -268,7 +268,6 @@ response:
 URL:/api/user/getCollection
 method:GET
 request {
-	userID:int
 	page:
 	rows:
 }
