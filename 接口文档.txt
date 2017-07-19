@@ -86,7 +86,7 @@ response:
 }
 
 ************************发表评论**********************
-URL:/api/normal/goods/comment
+URL:/api/normal/comment/addComment
 method:POST
 request:
 {
@@ -100,7 +100,7 @@ response:
 }
 
 ************************获取评论**********************
-URL:/api/anonymous/goods/getComment
+URL:/api/anonymous/comment/getComment
 method；GET
 request:{
 	id:100  //评论的ID，如果没写就是任意id
