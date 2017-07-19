@@ -46,6 +46,7 @@ request:{
 	l1: 一级
 	l2: 二级
 	l3: 三级
+	title: String
 	isValid: int //没写就是任意。1代表有效，0代表已过期
 }
 response:

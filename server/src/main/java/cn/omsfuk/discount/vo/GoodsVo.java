@@ -1,6 +1,7 @@
 package cn.omsfuk.discount.vo;
 
 import cn.omsfuk.discount.dto.GoodsDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -40,7 +41,10 @@ public class GoodsVo {
 
     private Integer isValid;
 
-    private Integer userId;
+    private UserVo user;
+
+    @JsonIgnore
+    private String picStr;
 
     private List<String> pic;
 
@@ -61,7 +65,6 @@ public class GoodsVo {
         this.date = date;
         this.deadline = deadline;
         this.isValid = isValid;
-        this.userId = userId;
         this.pic = pic;
     }
 
@@ -78,8 +81,11 @@ public class GoodsVo {
         this.date = goodsDto.getDate();
         this.deadline = goodsDto.getDeadline();
         this.isValid = goodsDto.getIsValid();
-        this.userId = goodsDto.getUserId();
         this.pic = transferPic(goodsDto.getPic(), goodsDto.getUserId());
+    }
+
+    public void transferPic() {
+        this.setPic(transferPic(this.getPicStr(), this.getUser().getId()));
     }
 
     private List<String> transferPic(String pic, Integer id) {

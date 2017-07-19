@@ -54,8 +54,8 @@ public class GoodsService {
 
     public Result getGoods(Integer id, Integer userId, String loc0, String loc1, String loc2,
                            Integer isValid, Integer begin, Integer rows) {
-        List<GoodsDto> goodsDtos = goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows);
-        List<GoodsVo> goodsVos = goodsDtos.stream().map(GoodsVo::new).collect(Collectors.toList());
+        List<GoodsVo> goodsVos = goodsDao.getGoods(id, userId, loc0, loc1, loc2, isValid, begin, rows);
+        goodsVos.stream().forEach(GoodsVo::transferPic);
         return ResultCache.getOk(goodsVos);
     }
 

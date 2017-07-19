@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.omsfuk.discount.dao.GoodsDao">
 
+    <resultMap id="goods" type="cn.omsfuk.discount.vo.GoodsVo">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="loc0" property="loc0"/>
+        <result column="loc1" property="loc1"/>
+        <result column="loc2" property="loc2"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="date" property="date"/>
+        <result column="deadline" property="deadline"/>
+        <result column="is_valid" property="isValid"/>
+        <result column="pic" property="picStr"/>
+        <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
+    </resultMap>
+
     <insert id="insertGoods">
         INSERT goods(`type`, title, description, loc0, loc1, loc2, longitude, latitude,
         `date`, deadline, is_valid, user_id, pic)
@@ -9,7 +26,7 @@
         #{longitude}, #{latitude}, current_timestamp(), #{deadline}, 1, #{userId}, #{pic})
     </insert>
 
-    <select id="getGoods" resultType="cn.omsfuk.discount.dto.GoodsDto">
+    <select id="getGoods" resultMap="goods">
         SELECT *
         FROM goods
         WHERE

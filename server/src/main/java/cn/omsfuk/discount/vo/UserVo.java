@@ -16,11 +16,13 @@ public class UserVo {
 
     private Integer id;
 
+    private Integer mark;
+
     private String nickName;
 
     private String realName;
 
-    @JsonProperty("readID")
+    @JsonProperty("realID")
     private String realId;
 
     private String gender;

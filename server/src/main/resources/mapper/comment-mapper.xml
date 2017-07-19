@@ -4,9 +4,8 @@
 
     <resultMap id="comment" type="cn.omsfuk.discount.vo.CommentVo">
         <id column="id" property="id"/>
-        <result column="user_id" property="userId"/>
         <result column="content" property="content"/>
-        <association property="nickName" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getNickNameById"/>
+        <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
 
     <insert id="insertComment">

@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT 1,
+  `mark` int(11) DEFAULT 0,
   `gender` varchar(5) DEFAULT '男',
   `email` varchar(50),
   `realname` varchar(20),

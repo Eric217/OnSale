@@ -4,9 +4,6 @@
 
     <resultMap id="user" type="cn.omsfuk.discount.vo.UserVo">
         <id column="id" property="id"/>
-        <result column="email" property="email"/>
-        <result column="password" property="password"/>
-        <result column="phone" property="phone"/>
         <association property="role" column="role_id" select="cn.omsfuk.discount.dao.Role.getRoleById"/>
     </resultMap>
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
@@ -16,6 +13,7 @@
     <update id="updateUser" parameterType="cn.omsfuk.discount.dto.UserDto">
         UPDATE user SET
         `type` = #{type},
+        mark = #{mark}
         gender = #{gender},
         nickName = #{nickName},
         password = #{password},

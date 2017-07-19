@@ -53,11 +53,11 @@ public class AuthService {
     }
 
     public Result registerWithEmail(String email, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, gender, null, null, email, null, password, Role.NORMAL));
+        return register(new UserDto(nickname, 0, gender, null, null, email, null, password, Role.NORMAL));
     }
 
     public Result registerWithPhone(String phone, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, gender, null, null, null, phone, password, Role.NORMAL));
+        return register(new UserDto(nickname, 0, gender, null, null, null, phone, password, Role.NORMAL));
     }
 
     public Result validate(String email, String phone, String nickname) {
