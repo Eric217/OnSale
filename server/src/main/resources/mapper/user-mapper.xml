@@ -23,6 +23,17 @@
         phone = #{phone}
         WHERE id = #{id}
     </update>
+    <update id="updateUploadMark">
+        UPDATE user
+        SET mark = mark + if(ul_time=0, 100, 10)
+        WHERE id = #{userId};
+    </update>
+
+    <update id="updateCommentMark">
+        UPDATE user
+        SET mark = mark + 1
+        WHERE id = #{userId};
+    </update>
 
     <select id="getUserById" resultMap="user">
         SELECT *
