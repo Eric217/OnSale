@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by omsfuk on 2017/7/19.
  */
 
-@RestController
+@RestController("annonymousMainController")
 @RequestMapping("api/anonymous")
 public class MainController {
 

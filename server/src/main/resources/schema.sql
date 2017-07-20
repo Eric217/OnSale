@@ -100,8 +100,10 @@ CREATE TABLE `favorite` (
 
 
 INSERT PRIVILEGE(`name`) VALUES("READ");
-INSERT PRIVILEGE(`name`) VALUES("UPLOAD");
-INSERT PRIVILEGE(`name`) VALUES("DELETE");
+INSERT PRIVILEGE(`name`) VALUES("UPLOAD_GOODS");
+INSERT PRIVILEGE(`name`) VALUES("DELETE_GOODS");
+INSERT PRIVILEGE(`name`) VALUES("ADD_COMMENT");
+INSERT PRIVILEGE(`name`) VALUES("DELETE_COMMENT");
 
 INSERT Role(`name`) VALUES("ANONYMOUSE");
 INSERT Role(`name`) VALUES("NORMAL");
@@ -110,6 +112,8 @@ INSERT role_privilege(`role_id`, `privilege_id`) VALUES(1, 1);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 1);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 2);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 3);
+INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 4);
+
 
 INSERT user(`nickName`, `phone`, `password`, `role_id`) VALUES("omsfuk", "110", "admin", 2);
 

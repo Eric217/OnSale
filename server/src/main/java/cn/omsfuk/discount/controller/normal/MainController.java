@@ -18,7 +18,7 @@ import java.sql.Timestamp;
  * Created by omsfuk on 2017/7/19.
  */
 
-@RestController
+@RestController("normalMainController")
 @RequestMapping("api/normal")
 public class MainController {
 
@@ -43,12 +43,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "goods/upload")
-    public Result upload(Integer type, String title, String description, String loc0, String loc1, String loc2,
+    public Result upload(Integer type, String title, String description, String l1, String l2, String l3,
                          Double longitude, Double latitude, Timestamp deadline, MultipartFile[] pic) {
-        if (!ObjectUtil.notNull(type, loc0, loc1, loc2, longitude, latitude, deadline, pic)) {
+        if (!ObjectUtil.notNull(type, l1, l2, l3, longitude, latitude, deadline, pic)) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
         }
-        return goodsService.uploadGoods(type, title, description, loc0, loc1, loc2, longitude, latitude, deadline, pic);
+        return goodsService.uploadGoods(type, title, description, l1, l2, l3, longitude, latitude, deadline, pic);
     }
 
     @RequestMapping(value = "comment/addComment", method = RequestMethod.POST)

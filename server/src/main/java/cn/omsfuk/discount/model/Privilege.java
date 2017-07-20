@@ -7,7 +7,11 @@ public interface Privilege {
 
     String READ = "READ";
 
-    String UPLOAD = "UPLOAD";
+    String UPLOAD_GOODS = "UPLOAD_GOODS";
 
-    String DELETE = "DELETE";
+    String DELETE_GOODS = "DELETE_COMMENT";
+
+    String ADD_COMMENT = "ADD_COMMENT";
+
+    String DELETE_COMMENT = "DELETE_COMMENT";
 }

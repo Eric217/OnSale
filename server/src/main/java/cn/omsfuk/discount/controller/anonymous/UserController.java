@@ -15,23 +15,23 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/anonymous/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "user/changeInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "changeInfo", method = RequestMethod.POST)
     public Result changeInfo(UserDto user) {
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "user/getUserInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "getUserInfo", method = RequestMethod.GET)
     public Result getUserInfo(Integer id, String nickName, String email, String phone) {
         return userService.getUserInfo(id, nickName, email, phone);
     }
 
-    @RequestMapping(value = "user/chagePic", method = RequestMethod.POST)
+    @RequestMapping(value = "chagePic", method = RequestMethod.POST)
     public Result changPortrait(MultipartFile data) {
         if (data == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
