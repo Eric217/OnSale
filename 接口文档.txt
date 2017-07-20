@@ -84,7 +84,18 @@ response:
 		]
 	}
 }
+*******************删除我发布的商品**************************
 
+URL:/api/normal/goods/deleteGood
+method:POST
+{
+	goodsID:[int]    //商品id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 ************************发表评论**********************
 URL:/api/normal/comment/addComment
 method:POST
@@ -134,7 +145,18 @@ response:
 		]
 	}
 }
+*******************删除评论**************************
 
+URL:/api/normal/comment/deleteComment
+method:POST
+{
+	commentID:[int]    //id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 ************************注册用户**********************
 URL:/api/anonymous/signUp
 method:POST
@@ -312,7 +334,18 @@ response {
 	status:200
 	message:OK
 }
+*******************删除收藏**************************
 
+URL:/api/normal/favorite/deleteFavor
+method:POST
+{
+	goodsID:[int]    //id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 
 
 
