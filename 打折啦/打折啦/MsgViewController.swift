@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
-class ServiceViewController:UIViewController {
+class MsgViewController:UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-
-        title = "Service"
+        title = "Message"
+        
+        
+        
         
     }
     
