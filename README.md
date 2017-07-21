@@ -350,6 +350,35 @@ response{
 	"status":200
 	"message":"OK"
 }
+*******************请求验证码1**************************
+
+URL:/api/anonymous/verify/phone
+method:POST
+{
+	phone:String	
+}
+response{
+	"status":200
+	"message":"OK"
+}
+*******************请求验证码2**************************
+
+URL:/api/anonymous/verify/code
+method:POST
+{
+	code:int
+}
+response{
+	"status":200
+	"message":"OK"
+	"data":{
+	
+	//和正常登陆返回的内容一样
+	
+	
+	}
+	
+}
 
 
 
