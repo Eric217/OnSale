@@ -271,6 +271,7 @@ request:
 	email: String
 	realName: String
 	realID: String
+	signature:String
 	
 }
 response:
@@ -393,7 +394,10 @@ phone:String
 email:String
 realName:String //真名
 realID:String   //身份证
+signature:String
+
 pic:image
+
 
 //访问图片的地址：
 img/{id}/portrait.png
