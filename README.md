@@ -367,11 +367,14 @@ response{
 URL:/api/anonymous/verify/code
 method:POST
 {
+	operation:int
 	code:int
 }
 response{
 	"status":200
 	"message":"OK"
+	//operation是1，代表注册，不用返回 data
+	//是2，代表登陆。返回正常登陆的所有信息 在data里
 	"data":{
 	
 	//和正常登陆返回的内容一样
