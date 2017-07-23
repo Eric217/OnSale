@@ -4,6 +4,7 @@ PODS:
   - Kingfisher (3.10.3)
   - MJRefresh (3.1.12)
   - pop (1.0.10)
+  - SnapKit (3.2.0)
   - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
   - MJRefresh
   - pop (~> 1.0)
+  - SnapKit (~> 3.0)
   - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -20,8 +22,9 @@ SPEC CHECKSUMS:
   Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 0bf1008937cee955808a9e401d74c511ba37d8b0
+PODFILE CHECKSUM: 6a3040fd3b48317cde70be550e2675323ff4d6cb
 
 COCOAPODS: 1.2.1

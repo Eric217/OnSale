@@ -69,7 +69,7 @@ class ViewController: ESTabBarController {
         nav1 = UINavigationController(rootViewController: OverViewController())
         nav2 = MapViewController()
         nav3 = UIViewController()
-        nav4 = UINavigationController(rootViewController: ServiceViewController())
+        nav4 = UINavigationController(rootViewController: MsgViewController())
         nav5 = UINavigationController(rootViewController: PersonViewController())
         
         

@@ -72,7 +72,7 @@ class ExampleIrregularityBasicContentView: ExampleBouncesContentView {
     override init(frame: CGRect) {
         super.init(frame: frame)
        
-        let color1 = UIColor.init(red: 1, green: 0.5, blue: 0.3, alpha: 1)
+        let color1 = Config.themeColor
         let color2 = UIColor.orange
         
         textColor = color1
