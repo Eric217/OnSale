@@ -24,4 +24,8 @@ public interface UserDao {
 
     int updateUser(UserDto user);
 
+    int updateUploadMark(@Param("userId") int userId);
+
+    int updateCommentMark(@Param("userId") int userId);
+
 }

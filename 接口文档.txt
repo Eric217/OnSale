@@ -14,7 +14,7 @@
 
 *******************上传新商品**************************
 
-URL:/api/goods/upload
+URL:/api/normal/goods/upload
 method:POST（multipartFormData）
     type:1, //商品种类 int ，非负数
     title:"title",//描述题目 String
@@ -35,7 +35,7 @@ response{
 }
 
 ***********************获取商品***********************
-URL:/api/goods/getGoods
+URL:/api/anonymous/goods/getGoods
 method；POST
 request:{
 	id : 100  //如果没写，就是任意id
@@ -46,7 +46,7 @@ request:{
 	l1: 一级
 	l2: 二级
 	l3: 三级
-	title:String
+	title: String
 	isValid: int //没写就是任意。1代表有效，0代表已过期
 }
 response:
@@ -84,9 +84,20 @@ response:
 		]
 	}
 }
+*******************删除我发布的商品**************************
 
+URL:/api/normal/goods/deleteGood
+method:POST
+{
+	goodsID:[int]    //商品id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 ************************发表评论**********************
-URL:/api/goods/comment
+URL:/api/normal/comment/addComment
 method:POST
 request:
 {
@@ -100,7 +111,7 @@ response:
 }
 
 ************************获取评论**********************
-URL:/api/goods/getComment
+URL:/api/anonymous/comment/getComment
 method；GET
 request:{
 	id:100  //评论的ID，如果没写就是任意id
@@ -134,9 +145,20 @@ response:
 		]
 	}
 }
+*******************删除评论**************************
 
+URL:/api/normal/comment/deleteComment
+method:POST
+{
+	commentID:[int]    //id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 ************************注册用户**********************
-URL:/api/user/signUp
+URL:/api/anonymous/signUp
 method:POST
 request:
 {
@@ -154,7 +176,7 @@ response:
 }
 *********************验证是否已经注册*********************
 验证账号或手机号或邮箱是否已经注册过用户
-URL:/api/user/validateSignUp
+URL:/api/anonymous/validateSignUp
 method:POST
 request:
 {
@@ -173,7 +195,7 @@ response:
 }
 
 ***************************登录**************************
-URL:/api/user/signIn
+URL:/api/anonymous/user/signIn
 method:POST
 request:
 {
@@ -201,7 +223,7 @@ response:
 	}
 }
 ***********************获取用户信息*********************
-URL:/api/user/getUserInfo
+URL:/api/anonymous/user/getUserInfo
 method:GET
 request:
 {
@@ -231,7 +253,7 @@ response:
 }
 
 ********************修改信息***************************
-URL:/api/user/changeInfo
+URL:/api/normal/user/changeInfo
 method:POST
 request:
 {
@@ -253,7 +275,7 @@ response:
 	"message":"OK"
 }
 ***********************修改头像**************************
-URL:/api/user/changePic
+URL:/api/normal/user/changePic
 method:POST
 request:
 {
@@ -265,10 +287,9 @@ response:
 	"message":"OK"
 }
 **********************访问收藏夹**************************
-URL:/api/user/getCollection
+URL:/api/normal/favorite/getFavorite
 method:GET
 request {
-	userID:int
 	page:
 	rows:
 }
@@ -304,7 +325,7 @@ response:
 }
 
 **********************添加到收藏夹**************************
-URL:/api/user/addCollection
+URL:/api/normal/favorite/addFavorite
 method:POST
 request {
 	goodsID:int
@@ -313,7 +334,18 @@ response {
 	status:200
 	message:OK
 }
+*******************删除收藏**************************
 
+URL:/api/normal/favorite/deleteFavor
+method:POST
+{
+	goodsID:[int]    //id数组
+	
+}
+response{
+	"status":200
+	"message":"OK"
+}
 
 
 

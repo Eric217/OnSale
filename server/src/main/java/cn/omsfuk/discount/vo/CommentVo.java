@@ -15,10 +15,7 @@ public class CommentVo {
     @JsonProperty("goodsID")
     private Integer goodsId;
 
-    @JsonProperty("userID")
-    private Integer userId;
-
-    private String nickName;
+    private UserVo user;
 
     private String content;
 

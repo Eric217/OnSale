@@ -2,12 +2,15 @@ package cn.omsfuk.discount.service;
 
 import cn.omsfuk.discount.base.Result;
 import cn.omsfuk.discount.base.ResultCache;
+import cn.omsfuk.discount.dao.FavoriteDao;
 import cn.omsfuk.discount.dao.UserDao;
 import cn.omsfuk.discount.dto.UserDto;
 import cn.omsfuk.discount.util.SessionUtil;
+import cn.omsfuk.discount.vo.MultiRowsResult;
 import cn.omsfuk.discount.vo.UserVo;
 import cn.omsfuk.discount.model.Role;
 import com.mysql.cj.api.Session;
+import org.apache.ibatis.annotations.ResultType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,13 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
  */
 
 @Service
-public class AuthService {
+public class UserService {
 
     @Autowired
     private UserDao userDao;
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private FavoriteDao favoriteDao;
 
     public Result loginWithEmail(String email, String password) {
         return login(userDao.getUserByEmail(email), password);
@@ -53,11 +59,11 @@ public class AuthService {
     }
 
     public Result registerWithEmail(String email, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, gender, null, null, email, null, password, Role.NORMAL));
+        return register(new UserDto(nickname, 0, gender, null, null, email, null, password, Role.NORMAL));
     }
 
     public Result registerWithPhone(String phone, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, gender, null, null, null, phone, password, Role.NORMAL));
+        return register(new UserDto(nickname, 0, gender, null, null, null, phone, password, Role.NORMAL));
     }
 
     public Result validate(String email, String phone, String nickname) {
@@ -106,5 +112,15 @@ public class AuthService {
         } else {
             return ResultCache.FAILURE;
         }
+    }
+
+    public Result getFavorite(int begin, int rows) {
+        int userId = SessionUtil.user().getId();
+        return ResultCache.getOk(new MultiRowsResult(favoriteDao.getFavoriteCountByUserId(userId),
+                favoriteDao.getFavoriteByUserId(userId, begin, rows).getFavorite()));
+    }
+
+    public Result addFavorite(Integer goodsId) {
+        return ResultCache.getOk(favoriteDao.insertFavorite(SessionUtil.user().getId(), goodsId));
     }
 }

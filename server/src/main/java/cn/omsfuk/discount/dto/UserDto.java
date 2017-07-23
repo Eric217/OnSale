@@ -13,6 +13,8 @@ public class UserDto {
 
     private Integer id;
 
+    private Integer mark;
+
     private Integer type;
 
     private String nickName;
@@ -34,8 +36,9 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(String nickName, String gender, String realName, String realId, String email, String phone, String password, Integer roleId) {
+    public UserDto(String nickName, Integer mark, String gender, String realName, String realId, String email, String phone, String password, Integer roleId) {
         this.nickName = nickName;
+        this.mark = mark;
         this.gender = gender;
         this.realName = realName;
         this.realId = realId;

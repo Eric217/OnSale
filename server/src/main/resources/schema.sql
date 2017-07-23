@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT 1,
+  `mark` int(11) DEFAULT 0,
   `gender` varchar(5) DEFAULT '男',
   `email` varchar(50),
   `realname` varchar(20),
@@ -85,10 +86,24 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS favorite;
+CREATE TABLE `favorite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `goods_id` (`goods_id`),
+  CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 INSERT PRIVILEGE(`name`) VALUES("READ");
-INSERT PRIVILEGE(`name`) VALUES("UPLOAD");
-INSERT PRIVILEGE(`name`) VALUES("DELETE");
+INSERT PRIVILEGE(`name`) VALUES("UPLOAD_GOODS");
+INSERT PRIVILEGE(`name`) VALUES("DELETE_GOODS");
+INSERT PRIVILEGE(`name`) VALUES("ADD_COMMENT");
+INSERT PRIVILEGE(`name`) VALUES("DELETE_COMMENT");
 
 INSERT Role(`name`) VALUES("ANONYMOUSE");
 INSERT Role(`name`) VALUES("NORMAL");
@@ -97,6 +112,8 @@ INSERT role_privilege(`role_id`, `privilege_id`) VALUES(1, 1);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 1);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 2);
 INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 3);
+INSERT role_privilege(`role_id`, `privilege_id`) VALUES(2, 4);
+
 
 INSERT user(`nickName`, `phone`, `password`, `role_id`) VALUES("omsfuk", "110", "admin", 2);
 
