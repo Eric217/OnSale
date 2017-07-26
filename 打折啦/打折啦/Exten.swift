@@ -21,13 +21,30 @@ extension UIView {
     
 }
 extension UITextField {
+    
     func psdMod() {
         placeholder = "请输入密码"
         clearsOnBeginEditing = true
         clearButtonMode = .whileEditing
-        keyboardAppearance = .dark
         keyboardType = .asciiCapable
         autocorrectionType = .no
     }
     
+    func addBottomLine(height: CGFloat,color: UIColor) {
+        let separator = UIView()
+        separator.backgroundColor = color
+        addSubview(separator)
+        separator.snp.makeConstraints{ (make) in
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(self)
+            make.height.equalTo(height)
+        }
+    }
+    
+    
 }
+
+
+
+
+

@@ -1,0 +1,24 @@
+1(1)
+    AOP, just add 2 files and no need for any setups, all navigation controllers will be able to use fullscreen pop gesture automatically.
+
+(2)
+    To disable this pop gesture of a navigation controller:
+        navigationController.fd_fullscreenPopGestureRecognizer.enabled = NO;
+    To disable this pop gesture of a view controller:
+        viewController.fd_interactivePopDisabled = YES;
+
+2(1)
+    self.fd_prefersNavigationBarHidden = NO; default
+
+3(1)
+    If you want to use fullscreen pop gesture in ViewController with scrollView or subclass of scrollView , you should customize the scrollView and overload a method:
+
+    - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+
+        if (self.contentOffset.x <= 0) {
+            if ([otherGestureRecognizer.delegate isKindOfClass:NSClassFromString(@"_FDFullscreenPopGestureRecognizerDelegate")]) {
+                return YES;
+            }
+        }
+        return NO;
+    }

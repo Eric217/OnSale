@@ -9,4 +9,7 @@ target ‘打折啦’ do
     pod 'Kingfisher', '~> 3.0'
     pod 'MJRefresh'
     pod 'SnapKit', '~> 3.0'
+    pod 'AMapNavi-NO-IDFA' 
+    pod 'AMapSearch-NO-IDFA' 
+    pod 'AMapLocation-NO-IDFA'
 end

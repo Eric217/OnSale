@@ -16,9 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
         window?.rootViewController = SignInViewController()
         
-        
+        AMapServices.shared().apiKey = "6f5d241254b4b38bde1cb97b1ef48144"
+    
         
         return true
     }

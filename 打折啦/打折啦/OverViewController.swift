@@ -17,7 +17,7 @@ class OverViewController:UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         title = "OverView"
-        
+        navBarBackgroundImage = UIImage(named: "2")
 //        Alamofire.request(<#T##url: URLConvertible##URLConvertible#>, method: <#T##HTTPMethod#>, parameters: <#T##Parameters?#>, encoding: <#T##ParameterEncoding#>, headers: <#T##HTTPHeaders?#>)
 //        
 //        Alamofire.upload(<#T##data: Data##Data#>, with: <#T##URLRequestConvertible#>)

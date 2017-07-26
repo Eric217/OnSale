@@ -54,6 +54,7 @@
     // Ignore pan gesture when the navigation controller is currently in transition.
     if ([[self.navigationController valueForKey:@"_isTransitioning"] boolValue]) {
         return NO;
+        
     }
     
     // Prevent calling the handler when the gesture begins in an opposite direction.

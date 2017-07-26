@@ -1,5 +1,15 @@
 PODS:
   - Alamofire (4.5.0)
+  - AMap3DMap-NO-IDFA (5.2.1):
+    - AMapFoundation-NO-IDFA (~> 1.3)
+  - AMapFoundation-NO-IDFA (1.4.0)
+  - AMapLocation-NO-IDFA (2.4.0):
+    - AMapFoundation-NO-IDFA (~> 1.4)
+  - AMapNavi-NO-IDFA (5.1.0):
+    - AMap3DMap-NO-IDFA (>= 5.2.1)
+    - AMapFoundation-NO-IDFA (~> 1.4)
+  - AMapSearch-NO-IDFA (5.2.1):
+    - AMapFoundation-NO-IDFA (~> 1.2)
   - ESTabBarController-swift (2.4)
   - Kingfisher (3.10.3)
   - MJRefresh (3.1.12)
@@ -9,6 +19,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - AMapLocation-NO-IDFA
+  - AMapNavi-NO-IDFA
+  - AMapSearch-NO-IDFA
   - ESTabBarController-swift
   - Kingfisher (~> 3.0)
   - MJRefresh
@@ -18,6 +31,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  AMap3DMap-NO-IDFA: ce3c57a3e0bd65ae09040ce55055b2020ab47783
+  AMapFoundation-NO-IDFA: d1ba541a56737c2048115a745b1dfcbe9901c248
+  AMapLocation-NO-IDFA: 9493012d3241a7d551942c7c1e1069b51f295083
+  AMapNavi-NO-IDFA: 4e355d9e790fb2268361b6380e3d06ad2a89cae3
+  AMapSearch-NO-IDFA: ec04c2c15ef278803234d959328acda14c2c3c5d
   ESTabBarController-swift: af496895039ba10ae60bf825473c45f23fc5c8b6
   Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
@@ -25,6 +43,6 @@ SPEC CHECKSUMS:
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 6a3040fd3b48317cde70be550e2675323ff4d6cb
+PODFILE CHECKSUM: 347c3d80af4c17d84265382c1a32d4adb4bae0a3
 
 COCOAPODS: 1.2.1
