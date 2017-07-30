@@ -186,10 +186,9 @@ request:
 {
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
-	//手机或邮箱在post的时候只有一个会有值
 	nickName:”abc"  // 昵称 String 
 	
-	//加上 昵称，一共传2个参数。任意一个传入参数都要求在数据库中唯一，否则 状态码  fail。
+	//只有一个参数有值。要求该值在数据库中唯一，否则 状态码 fail。
 	
 }
 response:
