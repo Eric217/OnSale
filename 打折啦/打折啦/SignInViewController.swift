@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 import SnapKit
 
-extension Str {
-    //static let plhd_1 = "手机/会员名/邮箱"
+extension Str {    //static let plhd_1 = "手机/会员名/邮箱"
     
 }
 
-class SignInViewController: UINavigationController {
+class SignInViewController: UIViewController {
     
     var headImgView: UIImageView!
     var accountField: UITextField!
@@ -54,10 +53,9 @@ class SignInViewController: UINavigationController {
         let font = Config.themeFont(21)
         
 //MARK: - setup view:
-        
-        navigationBar.isHidden = true
+
+        fd_prefersNavigationBarHidden = true
         view.backgroundColor = UIColor.white
-        
         
         
         headImgView = UIImageView()
@@ -73,10 +71,6 @@ class SignInViewController: UINavigationController {
         
 //以 headImgView 位置为参考
         accountField = UITextField()
-        //let leftView1 = UIView(frame: myRect(0,0,height,height))
-        //leftView1.setBackgroundImage(named: "placeholder_0")
-        //accountField.leftView = leftView1
-        //accountField.leftViewMode = .always
         accountField.placeholder = "手机/会员名/邮箱"
         accountField.clearButtonMode = .whileEditing
         accountField.tag = 200
@@ -92,12 +86,11 @@ class SignInViewController: UINavigationController {
             txtfConstr = make.top.equalTo(headImgView.snp.bottom).offset(distance).constraint
         }
         
-        mark1 = UIView(frame: myRect(0, 0, height, height))
-        mark1.setBackgroundImage(named: "12345")
-        accountField.rightView = mark1
-        accountField.rightViewMode = .whileEditing
-        
-        accountField.addBottomLine(height: lineH, color: UIColor.lightGray)
+        mark1 = UIView()
+        mark1.setBackgroundImage(named: "point")
+
+        accountField.addRightView(mark1)
+        accountField.addBottomLine(height: lineH, color: Config.themeGray)
         
 //以 accountField 为参考
         psdField = UITextField()
@@ -116,7 +109,7 @@ class SignInViewController: UINavigationController {
             make.top.equalTo(accountField.snp.bottom)
             make.size.centerX.equalTo(accountField)
         }
-        psdField.addBottomLine(height: lineH, color: UIColor.lightGray)
+        psdField.addBottomLine(height: lineH, color: Config.themeGray)
 
 //以 psdField 为参考
         loginButton = UIButton(type: .roundedRect)
@@ -168,17 +161,17 @@ class SignInViewController: UINavigationController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(11)
+
         view.endEditing(true)
-        print(10)
-        change(by: 1, duration: 0.1)
+
+        change(by: 1, duration: 0.2)
     }
 
     
     @objc func login(_ button: UIButton) {
         view.endEditing(true)
         
-        change(by: 1, duration: 0.1)
+        change(by: 1, duration: 0.2)
         
     }
     
@@ -195,7 +188,7 @@ class SignInViewController: UINavigationController {
     }
     
     @objc func new(_ button: UIButton) {
-        //self.pushViewController(SignUpViewController(), animated: true)
+        navigationController?.pushViewController(PhoneNumberController(), animated: true)
         
     }
     

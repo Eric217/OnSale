@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
-        window?.rootViewController = SignInViewController()
+        let nav = UINavigationController(rootViewController: SignInViewController())
+        nav.isNavigationBarHidden = true
+        window?.rootViewController = nav
         
         AMapServices.shared().apiKey = "6f5d241254b4b38bde1cb97b1ef48144"
-    
-        
+        print(try! Router.changePic.asURLRequest() )
         return true
     }
 

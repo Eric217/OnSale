@@ -12,4 +12,5 @@ target ‘打折啦’ do
     pod 'AMapNavi-NO-IDFA' 
     pod 'AMapSearch-NO-IDFA' 
     pod 'AMapLocation-NO-IDFA'
+    pod 'KVOController'
 end

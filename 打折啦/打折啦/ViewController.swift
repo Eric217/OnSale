@@ -49,6 +49,12 @@ class ViewController: ESTabBarController {
             [weak self] tabbarController, viewController, index in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                
+                //TODO: - 弹出方式
+                
+                
+                
+                
                 self?.present(UpLoadViewController(), animated: true, completion: nil)
             }
         }

@@ -30,7 +30,7 @@ extension UITextField {
         autocorrectionType = .no
     }
     
-    func addBottomLine(height: CGFloat,color: UIColor) {
+    func addBottomLine(height: CGFloat,color: UIColor = Config.themeGray) {
         let separator = UIView()
         separator.backgroundColor = color
         addSubview(separator)
@@ -41,9 +41,47 @@ extension UITextField {
         }
     }
     
+    func addTitleLabel(_ label: UILabel) {
+        label.textAlignment = .center
+        label.textColor = Config.themeGray
+        label.font = Config.themeFont(17)
+        addSubview(label)
+        label.snp.makeConstraints{ make in
+            make.bottom.equalTo(self.snp.top).inset(4)
+            make.centerX.width.equalTo(self)
+            make.height.equalTo(30)
+        }
+    }
+    func addRightView(_ myView: UIView) {
+        
+        addSubview(myView)
+        myView.snp.makeConstraints{ make in
+            make.left.equalTo(self.snp.right)
+            make.bottom.equalTo(self)
+            make.size.equalTo(self.snp.height)
+        }
+    }
+    
+    func addConstraintY(centerY: CGFloat, right: CGFloat) {
+        snp.makeConstraints{ (make) in
+            make.height.equalTo(45)
+            make.left.equalTo(right)
+            make.right.equalTo(-right)
+            make.centerY.equalTo(centerY)
+        }
+
+    }
     
 }
-
+extension UILabel {
+   
+    
+}
+extension String {
+    func len() -> Int {
+        return NSString(string: self).length
+    }
+}
 
 
 

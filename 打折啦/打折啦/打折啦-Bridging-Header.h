@@ -7,8 +7,14 @@
 #define observer_Bridging_Header_h
 
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "AMapFoundationKit.h"
-
+#import "AMapLocationKit.h"
+#import "AMapNaviKit.h"
+#import "AMapSearchKit.h"
+#import "MAMapKit.h"
+#import "FBKVOController.h"
+#import "KVOController.h"
 
 #endif
