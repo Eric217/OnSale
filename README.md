@@ -186,10 +186,9 @@ request:
 {
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
-	//手机或邮箱在post的时候只有一个会有值
 	nickName:”abc"  // 昵称 String 
 	
-	//加上 昵称，一共传2个参数。任意一个传入参数都要求在数据库中唯一，否则 状态码  fail。
+	//只有一个参数有值。要求该值在数据库中唯一，否则 状态码 fail。
 	
 }
 response:
@@ -291,6 +290,7 @@ response:
 	"status":200
 	"message":"OK"
 }
+
 **********************访问收藏夹**************************
 URL:/api/normal/favorite/getFavorite
 method:GET
@@ -351,7 +351,66 @@ response{
 	"status":200
 	"message":"OK"
 }
-*******************请求验证码1**************************
+//历史记录： 与 访问，添加，删除 收藏夹的一模一样，只是名字不一样
+**********************访问历史记录**************************
+URL:/api/normal/history/getHistory
+method:GET
+request {
+	page:
+	rows:
+}
+response:
+{
+	"status":200
+	"message":"OK"
+	"data":
+	{
+		total: 100
+		data: [
+			{
+			    id:132
+			    type:1, //商品种类 int 
+			    title:"title",//描述题目 String
+			    description:"description"//描述内容 String
+			    l1: 一级
+			    l2: 二级
+			    l3: 三级
+			    longitude:double  //经度
+  			    latitude:double   //纬度
+			    date:"2016-01-02 12:40:00", //上传时间 String
+			    deadline:"2018-08-09 09:09:09",//  截止String
+			    isValid:int
+			    userID: 上传者ID
+			    nickName: 上传者昵称
+			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
+		    }
+		    ...
+		]
+	}
+}
+
+**********************添加到历史记录**************************
+URL:/api/normal/history/addHistory
+method:POST
+request {
+	goodsID:int
+}
+response {
+	status:200
+	message:OK
+}
+*******************清空历史**************************
+
+URL:/api/normal/history/deleteHistory
+method:POST
+{
+ //我好像什么都不用传==
+}
+response{
+	"status":200
+	"message":"OK"
+}
+*******************请求手机**************************
 
 URL:/api/anonymous/verify/phone
 method:POST
@@ -362,26 +421,34 @@ response{
 	"status":200
 	"message":"OK"
 }
-*******************请求验证码2**************************
+*******************请求验证码1**************************
 
-URL:/api/anonymous/verify/code
+URL:/api/anonymous/verify/code1
 method:POST
 {
-	operation:int
 	code:int
 }
 response{
 	"status":200
 	"message":"OK"
-	//operation是1，代表注册，不用返回 data
-	//是2，代表登陆。返回正常登陆的所有信息 在data里
+	//code1，代表注册，不用返回 data
+}
+*******************请求验证码2**************************
+
+URL:/api/anonymous/verify/code2
+method:POST
+{
+	code:int
+}
+response{
+	"status":200
+	"message":"OK"
+	//code2，代表登陆。返回正常登陆的所有信息 在data里
 	"data":{
 	
-	//和正常登陆返回的内容一样
-	
+		//和正常登陆返回的内容一样
 	
 	}
-	
 }
 
 
