@@ -187,14 +187,14 @@ request:
 	email:"123@123" // 邮箱 String
 	phone:"1234567" // 手机 String
 	nickName:”abc"  // 昵称 String 
-	
-	//只有一个参数有值。要求该值在数据库中唯一，否则 状态码 fail。
-	
+	//只有一个参数有值。
 }
 response:
 {
 	"status":200
 	"message":"OK"
+	"data":true:注册过. //false
+	
 }
 
 ***************************登录**************************
