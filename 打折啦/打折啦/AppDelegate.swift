@@ -16,15 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let nav = UINavigationController(rootViewController: SignInViewController())
-        nav.isNavigationBarHidden = true
-        window?.rootViewController = nav
+        
+        
         
         AMapServices.shared().apiKey = "6f5d241254b4b38bde1cb97b1ef48144"
-        print(try! Router.changePic.asURLRequest() )
+        
+        
+        if !UserDefaults.standard.bool(forKey: isFirstOpened) {
+            UserDefaults.standard.saveBasic(true, key: isFirstOpened)
+        }
+        
         return true
     }
 
+    
+    
+    
+    
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

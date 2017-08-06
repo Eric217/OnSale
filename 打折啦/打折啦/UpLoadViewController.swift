@@ -37,8 +37,7 @@ class UpLoadViewController: UIViewController {
         
         view.layer.mask = maskLayer
         //view.frame.origin.y = 40
-        
-        
+       
         let label = UILabel(frame: myRect(100, 200, 100, 200))
         label.backgroundColor = UIColor.red
         view.addSubview(label)

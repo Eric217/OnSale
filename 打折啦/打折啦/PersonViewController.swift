@@ -15,11 +15,15 @@ class PersonViewController: UIViewController {
     
     var isHidden = false
     let speed:CGFloat = 5
-    
+    var person: Person!
     
     //MARK: - 加与除 观察者
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if currentID != person.id {
+            loadData()
+        }
+        
         tableView.addObserver(self, forKeyPath: "contentOffset", options: [.old, .new], context: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -31,10 +35,9 @@ class PersonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        title = "Me"
+        title = "我的"
   
-    
-       
+        //NotificationCenter.default.addObserver(<#T##observer: Any##Any#>, selector: <#T##Selector#>, name: <#T##NSNotification.Name?#>, object: <#T##Any?#>)
         
         
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height), style: .plain)
@@ -53,6 +56,11 @@ class PersonViewController: UIViewController {
         
         
         view.addSubview(tableView)
+        
+    }
+    
+    ///从userDefaults里加载数据
+    func loadData() {
         
     }
     

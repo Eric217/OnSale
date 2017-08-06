@@ -13,7 +13,7 @@ class MsgViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        title = "Message"
+        title = "消息"
         
         
         

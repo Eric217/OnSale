@@ -14,7 +14,7 @@ class MapViewController:UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
 
-        title = "Around"
+        title = "附近"
         
     }
     

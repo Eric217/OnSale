@@ -46,6 +46,15 @@ enum Router:URLRequestConvertible {
     /// 3 phone, 1 code1, 2 code2
     case verify(Int, value: Any)
     
+    var method: HTTPMethod {
+        switch self {
+        case .userInfo(_ , _), .getComment(_, _, _, _), .getFavorOrHist(_, _, _):
+            return .get
+        default: return .post
+        }
+    }
+    
+    
     func asURLRequest() throws -> URLRequest {
         
         let result: (path: String, para: Parameters) = {
@@ -144,7 +153,8 @@ enum Router:URLRequestConvertible {
         }()
         
         let url = try Router.baseUrlStr.asURL()
-        let urlRequest = URLRequest(url: url.appendingPathComponent(result.path))
+        var urlRequest = URLRequest(url: url.appendingPathComponent(result.path))
+        urlRequest.httpMethod = method.rawValue
         return try URLEncoding.default.encode(urlRequest, with: result.para)
     }
     
