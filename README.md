@@ -26,7 +26,8 @@ method:POST（multipartFormData）
     l1:一级，省
     l2:二级，市
     l3:三级，区
-    longitude:double  //经度
+    location：String
+    longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
     pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
@@ -68,8 +69,9 @@ response:
 			    description:"description"//描述内容 String
 			    l1: 一级
 			    l2: 二
-			    l3: 三级
-			    longitude:double  //经度
+			    l3: 三级
+			    location ：String
+			    longitude:double  //经度
   			    latitude:double   //纬度
 			    date:"2016-01-02 12:40:00", //上传时间 String
 			    deadline:"2018-08-09 09:09:09",//  截止String
