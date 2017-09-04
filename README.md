@@ -273,7 +273,7 @@ request:
 	realName: String
 	realID: String
 	signature:String
-	
+	birthday: String
 }
 response:
 {
@@ -405,13 +405,53 @@ response {
 
 URL:/api/normal/history/deleteHistory
 method:POST
-{
+request {
  //我好像什么都不用传==
 }
 response{
 	"status":200
 	"message":"OK"
 }
+
+//下面关注和增加粉丝能一块吗？
+*******************关注别人**************************
+
+URL:/api/normal/care/addCare
+method:POST
+request {
+   id: int   //把这个id加到 care数组里，或者我直接给你数组
+}
+response{
+	
+	"status":200
+	"message":"OK"
+}
+*******************增加粉丝**************************
+
+URL:/api/normal/fans/addFans
+method:POST
+request {
+   id: int   //这个id的人的粉丝值增加1
+}
+response{
+	
+	"status":200
+	"message":"OK"
+}
+*******************取消关注**************************
+
+URL:/api/normal/care/addCare
+method:POST
+request {
+   id: int   //把这个id从 care数组里去掉，还是直接给你数组
+}
+response{
+	
+	"status":200
+	"message":"OK"
+}
+
+
 *******************请求手机**************************
 
 URL:/api/anonymous/verify/phone
@@ -459,6 +499,7 @@ response{
 用户的全部属性：
 id:int
 mark:int//第一次100分，普通10分，评论1分
+type:int 
 gender:String //性别
 userID:String
 password:String
@@ -466,16 +507,16 @@ phone:String
 email:String
 realName:String //真名
 realID:String   //身份证
-signature:String
+signature:String 
+
+birthday: String //格式 2016-01-02，默认值: "1901-01-01"
+care: int数组， [1,2,3] 默认[]
+fans: int // 默认0
+
+
 
 pic:image
-
-
 //访问图片的地址：
 img/{id}/portrait.png
 
-type:int 
-1 : normal(default)
-2 : seller //卖东西的
-3 : unknown(扩展用。未登录用户我来处理，不计入type)
 ```
