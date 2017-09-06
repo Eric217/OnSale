@@ -510,7 +510,6 @@ realID:String   //身份证
 signature:String 
 
 birthday: String //格式 2016-01-02，默认值: "1901-01-01"
-care: int数组， [1,2,3] 默认[]
 fans: int // 默认0
 
 
