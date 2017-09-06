@@ -83,9 +83,9 @@ response:
 				...
 			    }
 			 
-			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组.以后扩展成视频 url
-			    
-		    }
+			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组
+			    picSmall: [ “http://12 7” , ”http://2156] //小图片url的String 数组
+		    }
 		    ...
 		]
 	}
