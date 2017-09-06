@@ -413,40 +413,44 @@ response{
 	"message":"OK"
 }
 
-//下面关注和增加粉丝能一块吗？
-*******************关注别人**************************
 
+**********************访问我关注的**************************
+URL:/api/normal/care/getCare
+method:GET
+request {
+	page:
+	rows:
+}
+
+response:
+{
+	"status":200
+	"message":"OK"
+	"data":
+	{
+		total: 100
+		data: [id]
+	}
+}
+
+**********************添加到关注**************************
 URL:/api/normal/care/addCare
 method:POST
 request {
-   id: int   //把这个id加到 care数组里，或者我直接给你数组
+	personID:int
 }
-response{
-	
-	"status":200
-	"message":"OK"
+response {
+	status:200
+	message:OK
 }
-*******************增加粉丝**************************
+*******************删除收藏**************************
 
-URL:/api/normal/fans/addFans
+URL:/api/normal/care/deleteCare
 method:POST
-request {
-   id: int   //这个id的人的粉丝值增加1
+{
+	personID:int
 }
 response{
-	
-	"status":200
-	"message":"OK"
-}
-*******************取消关注**************************
-
-URL:/api/normal/care/addCare
-method:POST
-request {
-   id: int   //把这个id从 care数组里去掉，还是直接给你数组
-}
-response{
-	
 	"status":200
 	"message":"OK"
 }
