@@ -30,7 +30,8 @@ method:POST（multipartFormData）
     longitude:double  //经度
     latitude:double   //纬度
     deadline:"2018-08-09 09:09:09",// 最后有效期 String
-    pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
+    picRatio:String //就是个字符串
+    pic: [“http://12345677” , ”http://2132445456] //这是图片的 url 的 String 数组.以后可能扩展成 视频 url
 
 }
 
@@ -82,7 +83,7 @@ response:
 			   	mark:int
 				...
 			    }
-			 
+			    picRatio: "String"
 			    pic: [“http://12 7” , ”http://2156] //图片url的String 数组
 			    picSmall: [ “http://12 7” , ”http://2156] //小图片url的String 数组
 		    }
