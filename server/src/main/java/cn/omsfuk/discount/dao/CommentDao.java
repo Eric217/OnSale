@@ -24,4 +24,6 @@ public interface CommentDao {
     int getCommentCount(@Param("id") Integer id,
                    @Param("userId") Integer userId,
                    @Param("goodsId") Integer goodsId);
+
+    int deleteComment(@Param("id") int id);
 }

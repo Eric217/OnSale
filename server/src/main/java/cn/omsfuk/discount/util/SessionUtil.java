@@ -13,6 +13,10 @@ public class SessionUtil {
         return (UserVo) RequestContextHolder.getRequestAttributes().getAttribute("user", RequestAttributes.SCOPE_SESSION);
     }
 
+    public static Object getAttribue(String key) {
+        return RequestContextHolder.getRequestAttributes().getAttribute(key, RequestAttributes.SCOPE_SESSION);
+    }
+
     public static void setAttribute(String key, Object value) {
         RequestContextHolder.getRequestAttributes().setAttribute(key, value, RequestAttributes.SCOPE_SESSION);
     }

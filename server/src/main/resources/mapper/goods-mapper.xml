@@ -4,20 +4,13 @@
 
     <resultMap id="goods" type="cn.omsfuk.discount.vo.GoodsVo">
         <id column="id" property="id"/>
-        <result column="type" property="type"/>
-        <result column="title" property="title"/>
-        <result column="description" property="description"/>
-        <result column="loc0" property="loc0"/>
-        <result column="loc1" property="loc1"/>
-        <result column="loc2" property="loc2"/>
-        <result column="longitude" property="longitude"/>
-        <result column="latitude" property="latitude"/>
-        <result column="date" property="date"/>
-        <result column="deadline" property="deadline"/>
-        <result column="is_valid" property="isValid"/>
         <result column="pic" property="picStr"/>
         <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
+    <delete id="deleteGoods">
+        DELETE FROM goods
+        WHERE id = #{id}
+    </delete>
 
     <select id="getGoodsByFavorite" parameterType="int" resultMap="goods">
         SELECT *
@@ -25,10 +18,16 @@
         WHERE id in (SELECT goods_id FROM favorite WHERE user_id = #{user_id})
     </select>
 
+    <select id="getGoodsByHistory" parameterType="int" resultMap="goods">
+        SELECT *
+        FROM goods
+        WHERE id in (SELECT goods_id FROM history WHERE user_id = #{user_id})
+    </select>
+
     <insert id="insertGoods">
-        INSERT goods(`type`, title, description, loc0, loc1, loc2, longitude, latitude,
+        INSERT goods(`type`, title, description, loc0, loc1, loc2, location, longitude, latitude,
         `date`, deadline, is_valid, user_id, pic)
-        VALUES (#{type}, #{title}, #{description}, #{loc0}, #{loc1}, #{loc2},
+        VALUES (#{type}, #{title}, #{description}, #{loc0}, #{loc1}, #{loc2}, #{location},
         #{longitude}, #{latitude}, current_timestamp(), #{deadline}, 1, #{userId}, #{pic})
     </insert>
 
@@ -58,14 +57,14 @@
                     <otherwise>
                         <choose>
                             <when test="loc0 != null">
-                                loc0 = #{loc0}
+                                loc0 = #{loc0} and
                             </when>
                         </choose>
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
-        and 1 = 1
+        1 = 1
         LIMIT #{begin}, #{rows}
     </select>
     <select id="getGoodsCount" resultType="java.lang.Integer">
@@ -102,6 +101,11 @@
             </otherwise>
         </choose>
         and 1 = 1
+    </select>
+
+    <select id="getAllGoods" resultMap="goods">
+        SELECT *
+        FROM goods where user_id = #{userId}
     </select>
 
 </mapper>

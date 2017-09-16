@@ -9,9 +9,14 @@
     </resultMap>
 
     <insert id="insertComment">
-        INSERT commentDto(goods_id, user_id, content, `date`)
-        VALUES (#{goodsId}, #{userId}, #{conent}, current_timestamp())
+        INSERT comment(goods_id, user_id, content, `date`)
+        VALUES (#{goodsId}, #{userId}, #{content}, current_timestamp())
     </insert>
+
+    <delete id="deleteComment">
+      DELETE FROM comment
+      WHERE id = #{id}
+    </delete>
 
     <select id="getComment" resultType="cn.omsfuk.discount.dto.CommentDto">
         SELECT *
@@ -27,6 +32,7 @@
             goods_id = #{goodsId} and
         </if>
         1 = 1
+        ORDER BY date DESC
         LIMIT #{begin}, #{rows}
     </select>
     <select id="getCommentCount" resultType="java.lang.Integer">

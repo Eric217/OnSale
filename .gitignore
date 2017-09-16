@@ -1,6 +1,7 @@
 server/target
 server/out
 server/.idea
+server/server.iml
 server/discount.iml
 
 

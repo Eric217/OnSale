@@ -4,6 +4,7 @@ import cn.omsfuk.discount.base.Result;
 import cn.omsfuk.discount.base.ResultCache;
 import cn.omsfuk.discount.service.UserService;
 import cn.omsfuk.discount.util.ObjectUtil;
+import cn.omsfuk.discount.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +21,11 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "signIn")
-    public Result signIn(String email, String phone, String password) {
+    @RequestMapping(value = "signIn", method = RequestMethod.POST)
+    public Result signIn(String email, String phone, String password, String nickName) {
+        if (ObjectUtil.notNull(nickName, password)) {
+            return userService.loginWithNickName(nickName, password);
+        }
         if (ObjectUtil.notNull(email, password)) {
             return userService.loginWithEmail(email, password);
         } else if (ObjectUtil.notNull(phone, password)) {
@@ -30,6 +34,7 @@ public class AuthController {
             return ResultCache.getFailure("wrong parameter format");
         }
     }
+
 
     @RequestMapping(value = "signUp", method = RequestMethod.POST)
     public Result signUp(String email, String phone, String nickName, String password, String gender) {
@@ -46,4 +51,22 @@ public class AuthController {
     public Result validate(String email, String phone, String nickname) {
         return userService.validate(email, phone, nickname);
     }
+
+    @RequestMapping(value = "verify/phone", method = RequestMethod.GET)
+    public Result verify_phone(String phone) {
+        return userService.sendCode(phone);
+    }
+    
+    @RequestMapping(value = {"verify/code1", "verify/code2"}, method = RequestMethod.GET)
+    public Result verifyCode1(String code) {
+        if (code == null) {
+            return ResultCache.WRONG_PARAMETER_FORMAT;
+        }
+        if (!code.equals(SessionUtil.getAttribue("code"))) {
+            return ResultCache.FAILURE;
+        }
+
+        return ResultCache.OK;
+    }
+
 }

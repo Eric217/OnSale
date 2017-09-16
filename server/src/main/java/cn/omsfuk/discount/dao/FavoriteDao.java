@@ -17,4 +17,5 @@ public interface FavoriteDao {
 
     int insertFavorite(@Param("userId") int userId, @Param("goodsId") int goodsId);
 
+    int deleteFavorite(@Param("userId") int userId, @Param("goodsId") int goodsId);
 }

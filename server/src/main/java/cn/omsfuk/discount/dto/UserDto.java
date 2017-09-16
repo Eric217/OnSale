@@ -3,6 +3,8 @@ package cn.omsfuk.discount.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * Created by omsfuk on 2017/7/17.
  */
@@ -19,6 +21,8 @@ public class UserDto {
 
     private String nickName;
 
+    private String signature;
+
     private String realName;
 
     private String realId;
@@ -33,11 +37,14 @@ public class UserDto {
 
     private Integer roleId;
 
+    private Date birthday;
+
     public UserDto() {
     }
 
-    public UserDto(String nickName, Integer mark, String gender, String realName, String realId, String email, String phone, String password, Integer roleId) {
+    public UserDto(String nickName, String signature, Integer mark, String gender, String realName, String realId, String email, String phone, String password, Integer roleId, Date birthday) {
         this.nickName = nickName;
+        this.signature = signature;
         this.mark = mark;
         this.gender = gender;
         this.realName = realName;
@@ -46,5 +53,6 @@ public class UserDto {
         this.phone = phone;
         this.password = password;
         this.roleId = roleId;
+        this.birthday = birthday;
     }
 }

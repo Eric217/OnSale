@@ -1,6 +1,7 @@
 package cn.omsfuk.discount.dao;
 
 import cn.omsfuk.discount.dto.GoodsDto;
+import cn.omsfuk.discount.plugin.Pager;
 import cn.omsfuk.discount.vo.GoodsVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -31,4 +32,8 @@ public interface GoodsDao {
                                 @Param("loc1") String loc1,
                                 @Param("loc2") String loc2,
                                 @Param("isValid") Integer isValid);
+
+    int deleteGoods(@Param("id") int goodsId);
+
+    List<GoodsVo> getAllGoods(@Param("pager") Pager<GoodsVo> pager, @Param("userId") int userId);
 }

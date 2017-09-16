@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.HistoryDao">
+
+    <resultMap id="history" type="cn.omsfuk.discount.dto.HistoryDto">
+        <id column="id" property="id"/>
+        <collection property="history" column="user_id" select="cn.omsfuk.discount.dao.GoodsDao.getGoodsByFavorite"/>
+    </resultMap>
+    <delete id="deleteHistory">
+        DELETE FROM history
+        WHERE user_id = #{userId}
+    </delete>
+
+    <select id="getHistoryByUserId" resultMap="history">
+        SELECT *
+        FROM history
+        WHERE user_id = #{userId}
+        LIMIT #{begin}, #{rows}
+    </select>
+    <select id="getHistoryCountByUserId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM history
+        WHERE user_id = #{userId}
+    </select>
+
+    <insert id="insertHistory">
+        INSERT history(user_id, goods_id)
+        VALUES(#{userId}, #{goodsId})
+    </insert>
+
+</mapper>

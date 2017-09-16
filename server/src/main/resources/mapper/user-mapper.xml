@@ -20,12 +20,13 @@
         email = #{email},
         realname = #{realName},
         real_id = #{realId},
-        phone = #{phone}
+        phone = #{phone},
+        birthday = #{birthday}
         WHERE id = #{id}
     </update>
     <update id="updateUploadMark">
         UPDATE user
-        SET mark = mark + if(ul_time=0, 100, 10)
+        SET mark = mark + if(ul_times=0, 100, 10)
         WHERE id = #{userId};
     </update>
 
@@ -52,7 +53,7 @@
         FROM user
         WHERE phone = #{phone}
     </select>
-    <select id="getUserByNickName" resultType="cn.omsfuk.discount.vo.UserVo">
+    <select id="getUserByNickName" resultMap="user">
         SELECT *
         FROM user
         WHERE nickName = #{nickName}
@@ -62,5 +63,11 @@
         SELECT nickname
         FROM user
         WHERE id = #{user_id}
+    </select>
+
+    <select id="getUserByCare" resultMap="user">
+        SELECT *
+        FROM user
+        WHERE id in (SELECT followed FROM care where follower = #{user_id})
     </select>
 </mapper>

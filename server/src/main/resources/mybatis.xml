@@ -6,7 +6,7 @@
 
     <settings>
         <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
-        <setting name="cacheEnabled" value="true"/>
+        <setting name="cacheEnabled" value="false"/>
         <!-- Sets the number of seconds the driver will wait for a response from the database -->
         <setting name="defaultStatementTimeout" value="3000"/>
         <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
@@ -22,5 +22,9 @@
         <typeAlias type="cn.omsfuk.discount.vo.UserVo" alias="user"/>
         <typeAlias type="cn.omsfuk.discount.dto.CommentDto" alias="comment"/>
     </typeAliases>
+
+    <!--<plugins>-->
+        <!--<plugin interceptor="cn.omsfuk.discount.plugin.QueryInterceptor"></plugin>-->
+    <!--</plugins>-->
 
 </configuration>

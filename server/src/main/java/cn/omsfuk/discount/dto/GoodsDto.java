@@ -27,6 +27,8 @@ public class GoodsDto {
 
     private String loc2;
 
+    private String location;
+
     private Double longitude;
 
     private Double latitude;
@@ -47,7 +49,7 @@ public class GoodsDto {
     }
 
     public GoodsDto(Integer type, String title, String description, String loc0, String loc1, String loc2,
-                    Double longitude, Double latitude, Timestamp date, Timestamp deadline,
+                    String location, Double longitude, Double latitude, Timestamp date, Timestamp deadline,
                     Integer isValid, Integer userId, String pic) {
         this.type = type;
         this.title = title;
@@ -55,6 +57,7 @@ public class GoodsDto {
         this.loc0 = loc0;
         this.loc1 = loc1;
         this.loc2 = loc2;
+        this.location = location;
         this.longitude = longitude;
         this.latitude = latitude;
         this.date = date;

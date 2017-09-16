@@ -9,9 +9,13 @@ import lombok.Data;
 @Data
 public class MultiRowsResult {
 
+    private Object data;
+
     private Integer total;
 
-    private Object data;
+    public MultiRowsResult(Object data) {
+        this.data = data;
+    }
 
     public MultiRowsResult(Integer total, Object data) {
         this.total = total;

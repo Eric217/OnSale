@@ -95,7 +95,7 @@ public class GoodsVo {
         List<String> ans = new LinkedList<>();
         Stream.of(pic.split(";")).forEach(item -> {
             if (!(item == null || item.length() == 0 || "".equals(item))) {
-                ans.add("img/" + id + "/" + item);
+                ans.add(item);
             }
         });
         return ans;

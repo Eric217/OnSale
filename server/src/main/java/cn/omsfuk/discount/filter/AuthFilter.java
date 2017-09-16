@@ -20,8 +20,9 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        if (!((HttpServletRequest)request).getRequestURI().contains("api/anonymous")) {
-            String login = (String) request.getAttribute("login");
+        String uri = ((HttpServletRequest)request).getRequestURI();
+        if (!uri.contains("api/anonymous") && !uri.startsWith("static") && !uri.startsWith("/static")) {
+            String login = (String) ((HttpServletRequest) request).getSession().getAttribute("login");
             if ("true".equals(login)) {
                 chain.doFilter(request, response);
             } else {

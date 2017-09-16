@@ -2,24 +2,35 @@ package cn.omsfuk.discount.service;
 
 import cn.omsfuk.discount.base.Result;
 import cn.omsfuk.discount.base.ResultCache;
+import cn.omsfuk.discount.dao.CareDao;
 import cn.omsfuk.discount.dao.FavoriteDao;
+import cn.omsfuk.discount.dao.HistoryDao;
 import cn.omsfuk.discount.dao.UserDao;
+import cn.omsfuk.discount.dto.CareDto;
+import cn.omsfuk.discount.dto.FavoriteDto;
+import cn.omsfuk.discount.dto.HistoryDto;
 import cn.omsfuk.discount.dto.UserDto;
+import cn.omsfuk.discount.model.Role;
+import cn.omsfuk.discount.util.CrytoUtil;
+import cn.omsfuk.discount.util.RandomUtil;
+import cn.omsfuk.discount.util.SMSUtil;
 import cn.omsfuk.discount.util.SessionUtil;
 import cn.omsfuk.discount.vo.MultiRowsResult;
 import cn.omsfuk.discount.vo.UserVo;
-import cn.omsfuk.discount.model.Role;
-import com.mysql.cj.api.Session;
-import org.apache.ibatis.annotations.ResultType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by omsfuk on 2017/7/17.
  */
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -31,12 +42,22 @@ public class UserService {
     @Autowired
     private FavoriteDao favoriteDao;
 
+    @Autowired
+    private HistoryDao historyDao;
+
+    @Autowired
+    private CareDao careDao;
+
     public Result loginWithEmail(String email, String password) {
         return login(userDao.getUserByEmail(email), password);
     }
 
     public Result loginWithPhone(String phone, String password) {
         return login(userDao.getUserByPhone(phone), password);
+    }
+
+    public Result loginWithNickName(String nickName, String password) {
+        return login(userDao.getUserByNickName(nickName), password);
     }
 
     private Result login(UserVo user, String password) {
@@ -59,11 +80,11 @@ public class UserService {
     }
 
     public Result registerWithEmail(String email, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, 0, gender, null, null, email, null, password, Role.NORMAL));
+        return register(new UserDto(nickname, null, 0, gender, null, null, email, null, password, Role.NORMAL, null));
     }
 
     public Result registerWithPhone(String phone, String nickname, String password, String gender) {
-        return register(new UserDto(nickname, 0, gender, null, null, null, phone, password, Role.NORMAL));
+        return register(new UserDto(nickname, null, 0, gender, null, null, null, phone, password, Role.NORMAL, null));
     }
 
     public Result validate(String email, String phone, String nickname) {
@@ -116,11 +137,63 @@ public class UserService {
 
     public Result getFavorite(int begin, int rows) {
         int userId = SessionUtil.user().getId();
-        return ResultCache.getOk(new MultiRowsResult(favoriteDao.getFavoriteCountByUserId(userId),
-                favoriteDao.getFavoriteByUserId(userId, begin, rows).getFavorite()));
+        FavoriteDto favorite = favoriteDao.getFavoriteByUserId(userId, begin, rows);
+        Integer total = favoriteDao.getFavoriteCountByUserId(userId);
+        return ResultCache.getOk(new MultiRowsResult(total, favorite == null ? null : favorite.getFavorite()));
     }
 
-    public Result addFavorite(Integer goodsId) {
+    public Result addFavorite(int goodsId) {
         return ResultCache.getOk(favoriteDao.insertFavorite(SessionUtil.user().getId(), goodsId));
+    }
+
+    public Result deleteFavor(int goodsId) {
+        return ResultCache.getOk(favoriteDao.deleteFavorite(SessionUtil.user().getId(), goodsId));
+    }
+
+    public Result getHistory(int begin, int rows) {
+        int userId = SessionUtil.user().getId();
+        HistoryDto history = historyDao.getHistoryByUserId(userId, begin, rows);
+        Integer total = historyDao.getHistoryCountByUserId(userId);
+        return ResultCache.getOk(new MultiRowsResult(total, history == null ? null : history.getHistory()));
+    }
+
+    public Result addHistory(int goodsId) {
+        return ResultCache.getOk(historyDao.insertHistory(SessionUtil.user().getId(), goodsId));
+    }
+
+    public Result deleteHistory() {
+        return ResultCache.getOk(historyDao.deleteHistory(SessionUtil.user().getId()));
+    }
+
+    public Result getCare(int begin, int rows) {
+        int userId = SessionUtil.user().getId();
+        CareDto care = careDao.getCareByUserId(userId, begin, rows);
+        Integer total = careDao.getCareCountByUserId(userId);
+        return ResultCache.getOk(new MultiRowsResult(total, care == null ? null : care.getUsers()));
+    }
+
+    public Result addCare(int followed) {
+        return ResultCache.getOk(careDao.insertCare(SessionUtil.user().getId(), followed));
+    }
+
+    public Result deleteCare(int followed) {
+        return ResultCache.getOk(careDao.deleteCare(SessionUtil.user().getId(), followed));
+    }
+
+    public Result sendCode(String phone) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        String token = "85005e015360167cd4aaaea88613e3d5";
+        String userId = "4e481c5a75eba023b85e5d8cb6953033";
+        String timestamp = simpleDateFormat.format(System.currentTimeMillis());
+        String sig = CrytoUtil.md5(userId + token + timestamp).toUpperCase();
+        String url = "https://api.ucpaas.com/2014-06-30/Accounts/4e481c5a75eba023b85e5d8cb6953033/Messages/templateSMS?sig=" + sig;
+        String auth = CrytoUtil.encodeBase64(userId + ':' + timestamp);
+        String code = RandomUtil.getNum(4);
+        System.out.println(SMSUtil.post(url, auth, "{\"templateSMS\":{\"appId\":\"804f8b6aef4a42c3a45c4278f4590ca6\",\"param\":\""
+                + code
+                +  "\",\"templateId\":\"144246\",\"to\":\"" + phone + "\"}}"));
+
+        SessionUtil.setAttribute("code", code);
+        return ResultCache.OK;
     }
 }

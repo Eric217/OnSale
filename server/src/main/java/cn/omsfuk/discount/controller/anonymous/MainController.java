@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by omsfuk on 2017/7/19.
  */
 
-@RestController("annonymousMainController")
+@RestController("anonymousMainController")
 @RequestMapping("api/anonymous")
 public class MainController {
 
@@ -33,5 +33,10 @@ public class MainController {
                            String l1, String l2, String l3,
                            Integer userID, Integer isValid) {
         return goodsService.getGoods(id, userID, l1, l2, l3, isValid, (page - 1) * rows, rows);
+    }
+
+    @RequestMapping(value = "getAllGoods", method = RequestMethod.GET)
+    public Result getAllGoods() {
+        return goodsService.getAllGoods();
     }
 }

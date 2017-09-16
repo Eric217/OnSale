@@ -4,6 +4,7 @@ import cn.omsfuk.discount.dto.UserDto;
 import cn.omsfuk.discount.util.SessionUtil;
 import cn.omsfuk.discount.vo.UserVo;
 import org.apache.commons.io.FileUtils;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,7 @@ public class FileService implements ServletContextAware {
     private static String basePath;
 
     public boolean initUserDir(UserDto user) {
+
         try {
             File dir = new File(basePath + user.getId() + "/");
             if (!dir.exists()) {

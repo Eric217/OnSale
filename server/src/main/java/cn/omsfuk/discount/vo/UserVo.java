@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * Created by omsfuk on 2017/7/17.
  */
@@ -20,6 +22,8 @@ public class UserVo {
 
     private String nickName;
 
+    private String signature;
+
     private String realName;
 
     @JsonProperty("realID")
@@ -33,14 +37,17 @@ public class UserVo {
 
     private String password;
 
+    private Date birthday;
+
     @JsonIgnore
     private Role role;
 
     public UserVo() {
     }
 
-    public UserVo(String nickName, String realName, String realId, String gender, String email, String phone, String password, Role role) {
+    public UserVo(String nickName, String signature, String realName, String realId, String gender, String email, String phone, String password, Role role, Date birthday) {
         this.nickName = nickName;
+        this.signature = signature;
         this.realName = realName;
         this.realId = realId;
         this.gender = gender;
@@ -48,5 +55,6 @@ public class UserVo {
         this.phone = phone;
         this.password = password;
         this.role = role;
+        this.birthday = birthday;
     }
 }

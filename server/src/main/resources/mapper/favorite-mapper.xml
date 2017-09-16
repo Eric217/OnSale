@@ -4,8 +4,12 @@
 
     <resultMap id="favorite" type="cn.omsfuk.discount.dto.FavoriteDto">
         <id column="id" property="id"/>
-        <association property="favorite" column="user_id" select="cn.omsfuk.discount.dao.GoodsDao.getGoodsByFavorite"/>
+        <association property="favorite" column="user_id" select="cn.omsfuk.discount.dao.GoodsDao.getGoodsByHistory"/>
     </resultMap>
+    <delete id="deleteFavorite">
+        DELETE FROM favorite
+        WHERE user_id = #{userId} and goods_id = #{goodsId}
+    </delete>
 
     <select id="getFavoriteByUserId" resultMap="favorite">
         SELECT *

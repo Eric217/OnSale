@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.omsfuk.discount.dao.CareDao">
+
+    <resultMap id="care" type="cn.omsfuk.discount.dto.CareDto">
+        <id column="id" property="id"/>
+        <collection property="users" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserByCare"/>
+    </resultMap>
+
+    <delete id="deleteCare">
+        DELETE FROM care
+        WHERE follower = #{follower} AND followed = #{followed}
+    </delete>
+
+    <select id="getCareByUserId" resultMap="care">
+        SELECT *
+        FROM care
+        WHERE follower = #{follower}
+        LIMIT #{begin}, #{rows}
+    </select>
+
+    <select id="getCareCountByUserId" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM care
+        WHERE follower = #{follower}
+    </select>
+
+    <insert id="insertCare">
+        INSERT care(follower, followed)
+        VALUES(#{follower}, #{followed})
+    </insert>
+
+</mapper>
