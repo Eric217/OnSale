@@ -5,6 +5,8 @@ import cn.omsfuk.discount.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by omsfuk on 2017/7/17.
  */
@@ -27,5 +29,7 @@ public interface UserDao {
     int updateUploadMark(@Param("userId") int userId);
 
     int updateCommentMark(@Param("userId") int userId);
+
+    List<UserVo> getUserByCare(@Param("user_id") Integer userId);
 
 }

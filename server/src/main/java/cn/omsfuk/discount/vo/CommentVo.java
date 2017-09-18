@@ -1,5 +1,6 @@
 package cn.omsfuk.discount.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class CommentVo {
 
     private String content;
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp date;
 
 }

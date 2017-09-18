@@ -10,6 +10,7 @@ CREATE TABLE `user` (
   `type` int(11) DEFAULT 1,
   `mark` int(11) DEFAULT 0,
   `gender` varchar(5) DEFAULT '男',
+  `birthday` varchar(5) DEFAULT '1901-01-01',
   `email` varchar(50),
   `realname` varchar(20),
   `real_id` char(18),

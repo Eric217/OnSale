@@ -19,6 +19,7 @@ public interface GoodsDao {
 
     List<GoodsVo> getGoods(@Param("id") Integer id,
                            @Param("userId") Integer userId,
+                           @Param("title") String title,
                            @Param("loc0") String loc0,
                            @Param("loc1") String loc1,
                            @Param("loc2") String loc2,
@@ -36,4 +37,11 @@ public interface GoodsDao {
     int deleteGoods(@Param("id") int goodsId);
 
     List<GoodsVo> getAllGoods(@Param("pager") Pager<GoodsVo> pager, @Param("userId") int userId);
+
+    List<GoodsVo> getGoodsByHistory(@Param("user_id") Integer userId);
+
+    List<GoodsVo> getGoodsByFavorite(@Param("user_id") Integer userId);
+
+    List<String> searchTitle(@Param("keyWord") String keyWord);
+
 }

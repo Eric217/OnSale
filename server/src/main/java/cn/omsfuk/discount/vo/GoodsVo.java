@@ -1,7 +1,9 @@
 package cn.omsfuk.discount.vo;
 
 import cn.omsfuk.discount.dto.GoodsDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -25,18 +27,23 @@ public class GoodsVo {
 
     private String description;
 
+    @JsonProperty("l1")
     private String loc0;
 
+    @JsonProperty("l2")
     private String loc1;
 
+    @JsonProperty("l3")
     private String loc2;
 
     private Double longitude;
 
     private Double latitude;
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp date;
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp deadline;
 
     private Integer isValid;
@@ -48,12 +55,18 @@ public class GoodsVo {
 
     private List<String> pic;
 
+    private String picRatio;
+
+    private String location;
+
+    private Integer commentCount;
+
     public GoodsVo() {
     }
 
     public GoodsVo(Integer type, String title, String description, String loc0, String loc1, String loc2,
                    Double longitude, Double latitude, Timestamp date, Timestamp deadline, Integer isValid,
-                   Integer userId, List<String> pic) {
+                   Integer userId, List<String> pic, String picRatio) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -66,6 +79,7 @@ public class GoodsVo {
         this.deadline = deadline;
         this.isValid = isValid;
         this.pic = pic;
+        this.picRatio = picRatio;
     }
 
     public GoodsVo(GoodsDto goodsDto) {
@@ -81,6 +95,7 @@ public class GoodsVo {
         this.date = goodsDto.getDate();
         this.deadline = goodsDto.getDeadline();
         this.isValid = goodsDto.getIsValid();
+        this.picRatio = goodsDto.getPicRatio();
         this.pic = transferPic(goodsDto.getPic(), goodsDto.getUserId());
     }
 

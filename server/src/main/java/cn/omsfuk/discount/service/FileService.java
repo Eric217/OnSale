@@ -1,6 +1,7 @@
 package cn.omsfuk.discount.service;
 
 import cn.omsfuk.discount.dto.UserDto;
+import cn.omsfuk.discount.util.FileUtil;
 import cn.omsfuk.discount.util.SessionUtil;
 import cn.omsfuk.discount.vo.UserVo;
 import org.apache.commons.io.FileUtils;
@@ -13,6 +14,8 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
+import static cn.omsfuk.discount.util.FileUtil.CLASSPATH;
 
 /**
  * Created by omsfuk on 2017/7/17.
@@ -40,7 +43,7 @@ public class FileService implements ServletContextAware {
 
     private void setDefaultPortrait(UserDto user) {
         try {
-            FileUtils.copyFile(new File(basePath + "default.png"), new File(basePath + user.getId() + "/portrait.png"));
+            FileUtils.copyFile(new File(basePath + "portrait.png"), new File(basePath + "static/img/" + user.getId() + "/portrait.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +51,7 @@ public class FileService implements ServletContextAware {
 
     public boolean overridePortrait(MultipartFile file) {
         try {
-            file.transferTo(new File(basePath + SessionUtil.user().getId() + "/portrait.png"));
+            file.transferTo(new File(basePath + "static/img/" + SessionUtil.user().getId() + "/portrait.png"));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -80,6 +83,7 @@ public class FileService implements ServletContextAware {
 
     @Override
     public void setServletContext(ServletContext servletContext) {
-        basePath = servletContext.getRealPath("").replace("\\", "/") + "image/";
+        basePath = FileUtil.CLASSPATH + "/";
+//        basePath = servletContext.getRealPath("").replace("\\", "/") + "image/";
     }
 }

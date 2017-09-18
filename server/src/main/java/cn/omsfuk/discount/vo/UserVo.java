@@ -1,6 +1,7 @@
 package cn.omsfuk.discount.vo;
 
 import cn.omsfuk.discount.model.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -35,17 +36,23 @@ public class UserVo {
 
     private String phone;
 
+    @JsonIgnore
     private String password;
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date birthday;
 
     @JsonIgnore
     private Role role;
 
+    private Integer type;
+
+    private Integer fans;
+
     public UserVo() {
     }
 
-    public UserVo(String nickName, String signature, String realName, String realId, String gender, String email, String phone, String password, Role role, Date birthday) {
+    public UserVo(String nickName, String signature, String realName, String realId, String gender, String email, String phone, String password, Role role, Date birthday, Integer type) {
         this.nickName = nickName;
         this.signature = signature;
         this.realName = realName;
@@ -56,5 +63,6 @@ public class UserVo {
         this.password = password;
         this.role = role;
         this.birthday = birthday;
+        this.type = type;
     }
 }

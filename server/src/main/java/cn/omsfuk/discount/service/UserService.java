@@ -2,10 +2,7 @@ package cn.omsfuk.discount.service;
 
 import cn.omsfuk.discount.base.Result;
 import cn.omsfuk.discount.base.ResultCache;
-import cn.omsfuk.discount.dao.CareDao;
-import cn.omsfuk.discount.dao.FavoriteDao;
-import cn.omsfuk.discount.dao.HistoryDao;
-import cn.omsfuk.discount.dao.UserDao;
+import cn.omsfuk.discount.dao.*;
 import cn.omsfuk.discount.dto.CareDto;
 import cn.omsfuk.discount.dto.FavoriteDto;
 import cn.omsfuk.discount.dto.HistoryDto;
@@ -15,6 +12,7 @@ import cn.omsfuk.discount.util.CrytoUtil;
 import cn.omsfuk.discount.util.RandomUtil;
 import cn.omsfuk.discount.util.SMSUtil;
 import cn.omsfuk.discount.util.SessionUtil;
+import cn.omsfuk.discount.vo.GoodsVo;
 import cn.omsfuk.discount.vo.MultiRowsResult;
 import cn.omsfuk.discount.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by omsfuk on 2017/7/17.
@@ -48,6 +47,9 @@ public class UserService {
     @Autowired
     private CareDao careDao;
 
+    @Autowired
+    private GoodsDao goodsDao;
+
     public Result loginWithEmail(String email, String password) {
         return login(userDao.getUserByEmail(email), password);
     }
@@ -69,7 +71,6 @@ public class UserService {
         }
         SessionUtil.setAttribute("user", user);
         SessionUtil.setAttribute("login", "true");
-        // TODO 返回用户信息
         return ResultCache.getOk(user);
     }
 
@@ -90,20 +91,20 @@ public class UserService {
     public Result validate(String email, String phone, String nickname) {
         if (email != null) {
             if (userDao.getUserByEmail(email) != null) {
-                return ResultCache.getFailure("email duplicate");
+                return ResultCache.getOk(true);
             }
         }
         if (phone != null) {
             if (userDao.getUserByPhone(phone) != null) {
-                return ResultCache.getFailure("phone duplicate");
+                return ResultCache.getOk(true);
             }
         }
         if (nickname != null) {
             if (userDao.getUserByNickName(nickname) != null) {
-                return ResultCache.getFailure("nickname duplicate");
+                return ResultCache.getOk(true);
             }
         }
-        return ResultCache.OK;
+        return ResultCache.getOk(false);
     }
 
     public Result getUserInfo(Integer id, String nickName, String email, String phone) {
@@ -137,9 +138,10 @@ public class UserService {
 
     public Result getFavorite(int begin, int rows) {
         int userId = SessionUtil.user().getId();
-        FavoriteDto favorite = favoriteDao.getFavoriteByUserId(userId, begin, rows);
+        List<GoodsVo> favorite = goodsDao.getGoodsByFavorite(userId);
+//        FavoriteDto favorite = favoriteDao.getFavoriteByUserId(userId, begin, rows);
         Integer total = favoriteDao.getFavoriteCountByUserId(userId);
-        return ResultCache.getOk(new MultiRowsResult(total, favorite == null ? null : favorite.getFavorite()));
+        return ResultCache.getOk(new MultiRowsResult(total, favorite == null ? null : favorite));
     }
 
     public Result addFavorite(int goodsId) {
@@ -152,9 +154,10 @@ public class UserService {
 
     public Result getHistory(int begin, int rows) {
         int userId = SessionUtil.user().getId();
-        HistoryDto history = historyDao.getHistoryByUserId(userId, begin, rows);
+        List<GoodsVo> history = goodsDao.getGoodsByHistory(userId);
+//        HistoryDto history = historyDao.getHistoryByUserId(userId, begin, rows);
         Integer total = historyDao.getHistoryCountByUserId(userId);
-        return ResultCache.getOk(new MultiRowsResult(total, history == null ? null : history.getHistory()));
+        return ResultCache.getOk(new MultiRowsResult(total, history == null ? null : history));
     }
 
     public Result addHistory(int goodsId) {
@@ -167,9 +170,10 @@ public class UserService {
 
     public Result getCare(int begin, int rows) {
         int userId = SessionUtil.user().getId();
-        CareDto care = careDao.getCareByUserId(userId, begin, rows);
+        List<UserVo> users = userDao.getUserByCare(userId);
+//        CareDto care = careDao.getCareByUserId(userId, begin, rows);
         Integer total = careDao.getCareCountByUserId(userId);
-        return ResultCache.getOk(new MultiRowsResult(total, care == null ? null : care.getUsers()));
+        return ResultCache.getOk(new MultiRowsResult(total, users));
     }
 
     public Result addCare(int followed) {
@@ -191,7 +195,7 @@ public class UserService {
         String code = RandomUtil.getNum(4);
         System.out.println(SMSUtil.post(url, auth, "{\"templateSMS\":{\"appId\":\"804f8b6aef4a42c3a45c4278f4590ca6\",\"param\":\""
                 + code
-                +  "\",\"templateId\":\"144246\",\"to\":\"" + phone + "\"}}"));
+                +  "\",\"templateId\":\"151913\",\"to\":\"" + phone + "\"}}"));
 
         SessionUtil.setAttribute("code", code);
         return ResultCache.OK;

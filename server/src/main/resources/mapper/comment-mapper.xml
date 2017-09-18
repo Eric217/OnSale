@@ -4,7 +4,6 @@
 
     <resultMap id="comment" type="cn.omsfuk.discount.vo.CommentVo">
         <id column="id" property="id"/>
-        <result column="content" property="content"/>
         <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
 
@@ -18,17 +17,17 @@
       WHERE id = #{id}
     </delete>
 
-    <select id="getComment" resultType="cn.omsfuk.discount.dto.CommentDto">
+    <select id="getComment" resultMap="comment">
         SELECT *
         FROM comment
         WHERE
-        <if test="id != null">
+        <if test="id != null and id != -1">
             id = #{id} and
         </if>
-        <if test="userId!= null">
+        <if test="userId != null and userId != -1">
             user_id = #{userId} and
         </if>
-        <if test="goodsId != null">
+        <if test="goodsId != null and goodsId != -1">
             goods_id = #{goodsId} and
         </if>
         1 = 1
@@ -36,18 +35,24 @@
         LIMIT #{begin}, #{rows}
     </select>
     <select id="getCommentCount" resultType="java.lang.Integer">
-        SELECT count(*)
+        SELECT count(1)
         FROM comment
         WHERE
-        <if test="id != null">
+        <if test="id != null and id != -1">
             id = #{id} and
         </if>
-        <if test="userId!= null">
+        <if test="userId != null and userId != -1">
             user_id = #{userId} and
         </if>
-        <if test="goodsId != null">
+        <if test="goodsId != null and goodsId != -1">
             goods_id = #{goodsId} and
         </if>
         1 = 1
+    </select>
+
+    <select id="getCommentCountById" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM comment
+        WHERE goods_id = #{id}
     </select>
 </mapper>

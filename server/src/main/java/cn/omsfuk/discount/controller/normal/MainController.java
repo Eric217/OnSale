@@ -29,12 +29,12 @@ public class MainController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping(value = "changeInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "user/changeInfo", method = RequestMethod.POST)
     public Result changeInfo(UserDto user) {
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "changePic", method = RequestMethod.POST)
+    @RequestMapping(value = "user/changePic", method = RequestMethod.POST)
     public Result changPortrait(MultipartFile data) {
         if (data == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
@@ -42,7 +42,7 @@ public class MainController {
         return userService.changePortrait(data);
     }
 
-    @RequestMapping(value = "favorite/addFavorite", method = RequestMethod.GET)
+    @RequestMapping(value = "favorite/addFavorite", method = RequestMethod.POST)
     public Result addCollection(Integer goodsID) {
         if (goodsID == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
@@ -64,7 +64,7 @@ public class MainController {
         return userService.deleteFavor(goodsID);
     }
 
-    @RequestMapping(value = "history/addHistory", method = RequestMethod.GET)
+    @RequestMapping(value = "history/addHistory", method = RequestMethod.POST)
     public Result addHistory(Integer goodsID) {
         if (goodsID == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
@@ -78,12 +78,12 @@ public class MainController {
         return userService.getHistory((page - 1) * rows, rows);
     }
 
-    @RequestMapping(value = "history/deleteHistory", method = RequestMethod.GET)
+    @RequestMapping(value = "history/deleteHistory", method = RequestMethod.POST)
     public Result deleteHistory() {
         return userService.deleteHistory();
     }
 
-    @RequestMapping(value = "care/addCare", method = RequestMethod.GET)
+    @RequestMapping(value = "care/addCare", method = RequestMethod.POST)
     public Result addCare(Integer personID) {
         return userService.addCare(personID);
     }
@@ -93,21 +93,21 @@ public class MainController {
         return userService.getCare((page - 1) * rows, rows);
     }
 
-    @RequestMapping(value = "care/deleteCare", method = RequestMethod.GET)
+    @RequestMapping(value = "care/deleteCare", method = RequestMethod.POST)
     public Result deleteCare(Integer personID) {
         return userService.deleteCare(personID);
     }
 
     @RequestMapping(value = "goods/upload")
     public Result upload(Integer type, String title, String description, String l1, String l2, String l3, String location,
-                         Double longitude, Double latitude, Timestamp deadline, MultipartFile[] pic, MultipartFile[] picSmall) {
+                         Double longitude, Double latitude, Timestamp deadline, MultipartFile[] pic, MultipartFile[] picSmall, String picRatio) {
         if (!ObjectUtil.notNull(type, l1, l2, l3, location, longitude, latitude, deadline)) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
         }
-        return goodsService.uploadGoods(type, title, description, l1, l2, l3, location, longitude, latitude, deadline, pic, picSmall);
+        return goodsService.uploadGoods(type, title, description, l1, l2, l3, location, longitude, latitude, deadline, pic, picSmall, picRatio);
     }
 
-    @RequestMapping(value = "comment/deleteGoods", method = RequestMethod.GET)
+    @RequestMapping(value = "comment/deleteGoods", method = RequestMethod.POST)
     public Result comment(Integer goodsID) {
         if (goodsID == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
@@ -123,7 +123,7 @@ public class MainController {
         return goodsService.comment(goodsID, content);
     }
 
-    @RequestMapping(value = "comment/deleteComment", method = RequestMethod.GET)
+    @RequestMapping(value = "comment/deleteComment", method = RequestMethod.POST)
     public Result deleteComment(Integer commentID) {
         if (commentID == null) {
             return ResultCache.WRONG_PARAMETER_FORMAT;

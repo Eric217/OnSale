@@ -5,6 +5,7 @@
     <resultMap id="goods" type="cn.omsfuk.discount.vo.GoodsVo">
         <id column="id" property="id"/>
         <result column="pic" property="picStr"/>
+        <association property="commentCount" column="id" select="cn.omsfuk.discount.dao.CommentDao.getCommentCountById"/>
         <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
     <delete id="deleteGoods">
@@ -26,86 +27,75 @@
 
     <insert id="insertGoods">
         INSERT goods(`type`, title, description, loc0, loc1, loc2, location, longitude, latitude,
-        `date`, deadline, is_valid, user_id, pic)
+        `date`, deadline, is_valid, user_id, pic, pic_ratio)
         VALUES (#{type}, #{title}, #{description}, #{loc0}, #{loc1}, #{loc2}, #{location},
-        #{longitude}, #{latitude}, current_timestamp(), #{deadline}, 1, #{userId}, #{pic})
+        #{longitude}, #{latitude}, current_timestamp(), #{deadline}, 1, #{userId}, #{pic}, #{picRatio})
     </insert>
 
     <select id="getGoods" resultMap="goods">
         SELECT *
         FROM goods
         WHERE
-        <if test="id != null">
+        <if test="id != null and id != -1">
             id = #{id} and
         </if>
-        <if test="userId != null">
+        <if test="userId != null and userId != -1">
             user_id = #{userId} and
         </if>
-        <if test="isValid != null">
+        <if test="isValid != null and isValid != -1">
             is_valid = #{isValid} and
         </if>
+        <if test="title != null and title != ''">
+            title like concat('%', #{title}, '%') and
+        </if>
 
-        <choose>
-            <when test="loc2 != null">
-                loc0 = #{loc0} and loc1 = #{loc1} and loc2 =#{loc2}
-            </when>
-            <otherwise>
-                <choose>
-                    <when test="loc1 != null">
-                        loc0 = #{loc0} and loc1 = #{loc1}
-                    </when>
-                    <otherwise>
-                        <choose>
-                            <when test="loc0 != null">
-                                loc0 = #{loc0} and
-                            </when>
-                        </choose>
-                    </otherwise>
-                </choose>
-            </otherwise>
-        </choose>
-        1 = 1
-        LIMIT #{begin}, #{rows}
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        1 = 1 LIMIT #{begin}, #{rows}
     </select>
     <select id="getGoodsCount" resultType="java.lang.Integer">
         SELECT count(*)
         FROM goods
         WHERE
-        <if test="id != null">
+        <if test="id != null and id != -1">
             id = #{id} and
         </if>
-        <if test="userId != null">
+        <if test="userId != null and userId != -1">
             user_id = #{userId} and
         </if>
-        <if test="isValid != null">
+        <if test="isValid != null and isValid != -1">
             is_valid = #{isValid} and
         </if>
 
-        <choose>
-            <when test="loc2 != null">
-                loc0 = #{loc0} and loc1 = #{loc1} and loc2 =#{loc2}
-            </when>
-            <otherwise>
-                <choose>
-                    <when test="loc1 != null">
-                        loc0 = #{loc0} and loc1 = #{loc1}
-                    </when>
-                    <otherwise>
-                        <choose>
-                            <when test="loc0 != null">
-                                loc0 = #{loc0}
-                            </when>
-                        </choose>
-                    </otherwise>
-                </choose>
-            </otherwise>
-        </choose>
-        and 1 = 1
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        <if test="loc0 != null and loc0 != ''">
+            loc0 = #{loc0} and
+        </if>
+        1 = 1
     </select>
 
     <select id="getAllGoods" resultMap="goods">
         SELECT *
         FROM goods where user_id = #{userId}
+    </select>
+
+    <select id="searchTitle" resultType="string">
+        SELECT title
+        FROM goods
+        WHERE title like concat('%', #{keyWord}, '%')
+        LIMIT 0, 10
     </select>
 
 </mapper>

@@ -7,13 +7,13 @@
         <association property="role" column="role_id" select="cn.omsfuk.discount.dao.Role.getRoleById"/>
     </resultMap>
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
-        INSERT USER(email, phone, nickName, password, role_id)
+        INSERT user(email, phone, nickName, password, role_id)
         VALUES(#{email}, #{phone}, #{nickName}, #{password}, #{roleId})
     </insert>
     <update id="updateUser" parameterType="cn.omsfuk.discount.dto.UserDto">
         UPDATE user SET
         `type` = #{type},
-        mark = #{mark}
+        mark = #{mark},
         gender = #{gender},
         nickName = #{nickName},
         password = #{password},

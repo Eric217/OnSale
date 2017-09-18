@@ -30,13 +30,19 @@ public class MainController {
     public Result getGoods(Integer id,
                            @RequestParam(value = "page", defaultValue = "1") Integer page,
                            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                           String title,
                            String l1, String l2, String l3,
                            Integer userID, Integer isValid) {
-        return goodsService.getGoods(id, userID, l1, l2, l3, isValid, (page - 1) * rows, rows);
+        return goodsService.getGoods(id, userID, title, l1, l2, l3, isValid, (page - 1) * rows, rows);
     }
 
     @RequestMapping(value = "getAllGoods", method = RequestMethod.GET)
     public Result getAllGoods() {
         return goodsService.getAllGoods();
+    }
+
+    @RequestMapping(value = "searchTitle", method = RequestMethod.POST)
+    public Result searchTitle(String keyWord) {
+        return goodsService.searchTitle(keyWord);
     }
 }

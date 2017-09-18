@@ -33,6 +33,8 @@ public class GoodsDto {
 
     private Double latitude;
 
+    private String picRatio;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp date;
 
@@ -50,7 +52,7 @@ public class GoodsDto {
 
     public GoodsDto(Integer type, String title, String description, String loc0, String loc1, String loc2,
                     String location, Double longitude, Double latitude, Timestamp date, Timestamp deadline,
-                    Integer isValid, Integer userId, String pic) {
+                    Integer isValid, Integer userId, String pic, String picRatio) {
         this.type = type;
         this.title = title;
         this.description = description;
@@ -65,5 +67,6 @@ public class GoodsDto {
         this.isValid = isValid;
         this.userId = userId;
         this.pic = pic;
+        this.picRatio = picRatio;
     }
 }

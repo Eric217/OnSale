@@ -21,7 +21,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "signIn", method = RequestMethod.POST)
+    @RequestMapping(value = "user/signIn", method = RequestMethod.POST)
     public Result signIn(String email, String phone, String password, String nickName) {
         if (ObjectUtil.notNull(nickName, password)) {
             return userService.loginWithNickName(nickName, password);
@@ -35,7 +35,6 @@ public class AuthController {
         }
     }
 
-
     @RequestMapping(value = "signUp", method = RequestMethod.POST)
     public Result signUp(String email, String phone, String nickName, String password, String gender) {
         if (ObjectUtil.notNull(email, password, nickName, gender)) {
@@ -46,27 +45,32 @@ public class AuthController {
             return ResultCache.getFailure("wrong parameter format");
         }
     }
+    @RequestMapping(value = "user/logout", method = RequestMethod.GET)
+    public Result logout() {
+        SessionUtil.setAttribute("login", "false");
+        return ResultCache.OK;
+    }
 
     @RequestMapping(value = "validateSignUp", method = RequestMethod.POST)
     public Result validate(String email, String phone, String nickname) {
         return userService.validate(email, phone, nickname);
     }
 
-    @RequestMapping(value = "verify/phone", method = RequestMethod.GET)
+    @RequestMapping(value = "verify/phone", method = RequestMethod.POST)
     public Result verify_phone(String phone) {
         return userService.sendCode(phone);
     }
     
-    @RequestMapping(value = {"verify/code1", "verify/code2"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"verify/code1", "verify/code2"}, method = RequestMethod.POST)
     public Result verifyCode1(String code) {
-        if (code == null) {
+        if (code == null || "".equals(code)) {
             return ResultCache.WRONG_PARAMETER_FORMAT;
         }
         if (!code.equals(SessionUtil.getAttribue("code"))) {
-            return ResultCache.FAILURE;
+            return ResultCache.getOk(false);
         }
 
-        return ResultCache.OK;
+        return ResultCache.getOk(true);
     }
 
 }
