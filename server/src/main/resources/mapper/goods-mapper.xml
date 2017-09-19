@@ -92,9 +92,9 @@
     </select>
 
     <select id="searchTitle" resultType="string">
-        SELECT title
+        SELECT DISTINCT title
         FROM goods
-        WHERE title like concat('%', #{keyWord}, '%')
+        WHERE MATCH (title) AGAINST (#{keyWord} IN NATURAL LANGUAGE MODE)
         LIMIT 0, 10
     </select>
 

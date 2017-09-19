@@ -7,7 +7,7 @@
         <association property="user" column="user_id" select="cn.omsfuk.discount.dao.UserDao.getUserById"/>
     </resultMap>
 
-    <insert id="insertComment">
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="id">
         INSERT comment(goods_id, user_id, content, `date`)
         VALUES (#{goodsId}, #{userId}, #{content}, current_timestamp())
     </insert>
@@ -54,5 +54,10 @@
         SELECT count(1)
         FROM comment
         WHERE goods_id = #{id}
+    </select>
+    <select id="getCommentById" resultMap="comment">
+        SELECT *
+        FROM comment
+        WHERE id = #{id}
     </select>
 </mapper>

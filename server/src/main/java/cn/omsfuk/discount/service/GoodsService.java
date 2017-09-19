@@ -12,6 +12,7 @@ import cn.omsfuk.discount.plugin.Pager;
 import cn.omsfuk.discount.util.FileUtil;
 import cn.omsfuk.discount.util.SessionUtil;
 import cn.omsfuk.discount.util.UUIDUtil;
+import cn.omsfuk.discount.vo.CommentVo;
 import cn.omsfuk.discount.vo.GoodsVo;
 import cn.omsfuk.discount.vo.MultiRowsResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,15 +86,17 @@ public class GoodsService {
 
     public Result comment(Integer goodsId, String conent) {
         int userId = SessionUtil.user().getId();
-        commentDao.insertComment(new CommentDto(goodsId, userId, conent));
+        CommentDto commentDto = new CommentDto(goodsId, userId, conent);
+        commentDao.insertComment(commentDto);
         userDao.updateCommentMark(userId);
-        return ResultCache.OK;
+        CommentVo commentVo = commentDao.getCommentById(commentDto.getId());
+        return ResultCache.getOk(commentVo);
     }
 
     public Result getComment(Integer id, Integer userId, Integer goodsId, Integer begin, Integer rows) {
-        List<CommentDto> commentDtos = commentDao.getComment(id, userId, goodsId, begin, rows);
+        List<CommentVo> commentVos = commentDao.getComment(id, userId, goodsId, begin, rows);
         Integer total = commentDao.getCommentCount(id, userId, goodsId);
-        return ResultCache.getOk(new MultiRowsResult(total, commentDtos));
+        return ResultCache.getOk(new MultiRowsResult(total, commentVos));
     }
 
     public Result deleteComment(Integer commentID) {

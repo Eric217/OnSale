@@ -36,7 +36,6 @@ public class UserVo {
 
     private String phone;
 
-    @JsonIgnore
     private String password;
 
     @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
