@@ -45,11 +45,6 @@ public class AuthController {
             return ResultCache.getFailure("wrong parameter format");
         }
     }
-    @RequestMapping(value = "user/logout", method = RequestMethod.GET)
-    public Result logout() {
-        SessionUtil.setAttribute("login", "false");
-        return ResultCache.OK;
-    }
 
     @RequestMapping(value = "validateSignUp", method = RequestMethod.POST)
     public Result validate(String email, String phone, String nickname) {

@@ -16,13 +16,13 @@
     <select id="getGoodsByFavorite" parameterType="int" resultMap="goods">
         SELECT *
         FROM goods
-        WHERE id in (SELECT goods_id FROM favorite WHERE user_id = #{user_id})
+        WHERE id in (SELECT goods_id FROM favorite WHERE user_id = #{user_id}) and deadline > now()
     </select>
 
     <select id="getGoodsByHistory" parameterType="int" resultMap="goods">
         SELECT *
         FROM goods
-        WHERE id in (SELECT goods_id FROM history WHERE user_id = #{user_id})
+        WHERE id in (SELECT goods_id FROM history WHERE user_id = #{user_id}) and deadline > now()
     </select>
 
     <insert id="insertGoods">
@@ -58,7 +58,7 @@
         <if test="loc0 != null and loc0 != ''">
             loc0 = #{loc0} and
         </if>
-        1 = 1 LIMIT #{begin}, #{rows}
+        deadline > now() and 1 = 1 LIMIT #{begin}, #{rows}
     </select>
     <select id="getGoodsCount" resultType="java.lang.Integer">
         SELECT count(*)
@@ -83,7 +83,7 @@
         <if test="loc0 != null and loc0 != ''">
             loc0 = #{loc0} and
         </if>
-        1 = 1
+        1 = 1 and deadline > now()
     </select>
 
     <select id="getAllGoods" resultMap="goods">

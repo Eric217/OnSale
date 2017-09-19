@@ -11,16 +11,6 @@
 
     <mvc:resources mapping="/static/img/**" location="classpath:/static/img/"/>
 
-    <mvc:annotation-driven>
-        <mvc:message-converters>
-            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="cn.omsfuk.discount.JsonObjectMapper"></bean>
-                </property>
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
-
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
           p:defaultEncoding="utf-8"
           p:maxUploadSize="10485760000"

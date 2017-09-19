@@ -6,6 +6,7 @@ import cn.omsfuk.discount.dto.UserDto;
 import cn.omsfuk.discount.service.GoodsService;
 import cn.omsfuk.discount.service.UserService;
 import cn.omsfuk.discount.util.ObjectUtil;
+import cn.omsfuk.discount.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -129,5 +130,11 @@ public class MainController {
             return ResultCache.WRONG_PARAMETER_FORMAT;
         }
         return goodsService.deleteComment(commentID);
+    }
+
+    @RequestMapping(value = "user/logout", method = RequestMethod.GET)
+    public Result logout() {
+        SessionUtil.setAttribute("login", "false");
+        return ResultCache.OK;
     }
 }

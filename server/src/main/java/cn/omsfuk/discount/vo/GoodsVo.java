@@ -41,10 +41,10 @@ public class GoodsVo {
 
     private Double latitude;
 
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="UTC", pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp date;
 
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="UTC", pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp deadline;
 
     private Integer isValid;
