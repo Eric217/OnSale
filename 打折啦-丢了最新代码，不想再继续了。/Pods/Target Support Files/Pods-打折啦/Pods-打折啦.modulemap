@@ -1,0 +1,6 @@
+framework module Pods____ {
+  umbrella header "Pods-打折啦-umbrella.h"
+
+  export *
+  module * { export * }
+}
